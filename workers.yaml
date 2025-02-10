@@ -1,0 +1,32 @@
+# Worker registry. Set GROQ_API_KEY and GEMINI_API_KEY in .env first.
+# Groq and Gemini both expose OpenAI-compatible /chat/completions endpoints,
+# so the `type: openai` proxy path handles them without changes.
+
+workers:
+  - id: groq-llama-3.1-8b
+    type: openai
+    url: https://api.groq.com/openai/v1
+    model: llama-3.1-8b-instant
+    api_key_env: GROQ_API_KEY
+    weight: 1
+
+  - id: groq-llama-3.3-70b
+    type: openai
+    url: https://api.groq.com/openai/v1
+    model: llama-3.3-70b-versatile
+    api_key_env: GROQ_API_KEY
+    weight: 1
+
+  - id: gemini-2.5-flash
+    type: openai
+    url: https://generativelanguage.googleapis.com/v1beta/openai
+    model: gemini-2.5-flash
+    api_key_env: GEMINI_API_KEY
+    weight: 1
+
+  - id: gemini-flash-latest
+    type: openai
+    url: https://generativelanguage.googleapis.com/v1beta/openai
+    model: gemini-flash-latest
+    api_key_env: GEMINI_API_KEY
+    weight: 1
