@@ -1,0 +1,41 @@
+# Local Prometheus + Grafana stack for the InferMesh gateway.
+#
+# Usage:
+#   1. Start the gateway: uv run uvicorn infermesh.main:create_app --factory --port 8000
+#   2. From this directory: docker compose up -d
+#   3. Open http://localhost:3000   (admin / admin on first login)
+#   4. Dashboard "InferMesh Gateway" is provisioned automatically.
+#
+# Scrapes http://host.docker.internal:8000/metrics every 5s.
+
+services:
+  prometheus:
+    image: prom/prometheus:v3.7.4
+    container_name: infermesh-prom
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=7d"
+      - "--log.level=warn"
+
+  grafana:
+    image: grafana/grafana:13.0.0
+    container_name: infermesh-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_USERS_DEFAULT_THEME: dark
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning:ro
+      - ./dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
