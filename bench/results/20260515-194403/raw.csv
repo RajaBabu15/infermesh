@@ -1,0 +1,951 @@
+mode,scenario,provider,model,idx,latency_ms,status,retries,completion_tokens,prompt_tokens,error
+gateway,shared_prefix,groq,llama-3.1-8b-instant,0,413.5496250237338,200,0,8,70,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,1,537.3797499923967,200,0,34,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,2,488.2769170217216,200,0,46,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,3,553.1369589734823,200,0,55,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,4,503.1583340023644,200,0,7,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,5,534.6218749764375,200,0,22,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,6,402.5418749661185,200,0,40,71,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,7,560.5429999995977,200,0,42,74,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,8,561.4368330570869,200,0,43,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,9,607.0499579655007,200,0,60,73,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,10,503.73520801076666,200,0,49,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,11,357.31095797382295,200,0,29,71,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,12,528.0972910113633,200,0,60,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,13,564.8682079627179,200,0,42,70,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,14,564.0437909751199,200,0,39,68,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,15,175.58770801406354,200,0,8,70,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,16,192.62612500460818,200,0,34,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,17,214.9375409935601,200,0,54,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,18,253.15995898563415,200,0,56,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,19,158.71020895428956,200,0,14,72,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,20,213.17358303349465,200,0,27,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,21,213.4770829579793,200,0,33,71,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,22,230.6050000479445,200,0,47,74,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,23,247.5537499994971,200,0,45,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,24,206.81624999269843,200,0,31,73,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,25,227.49399999156594,200,0,45,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,26,174.33433304540813,200,0,35,71,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,27,173.526959028095,200,0,34,69,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,28,252.54979101009667,200,0,43,70,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,29,246.89475004561245,200,0,39,68,
+gateway,shared_prefix,groq,llama-3.1-8b-instant,30,1568.3620000490919,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,31,1140.1782920002006,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,32,1248.1649580295198,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,33,1191.5031250100583,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,34,1515.2332079596817,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,35,1440.8708330010995,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,36,1270.9738340345211,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,37,1097.6312500424683,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,38,1188.6469579767436,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,39,1176.0464159888215,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,40,1314.422499970533,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,41,1454.912792018149,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,42,1431.0971669619903,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,43,1118.9640840166248,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,44,1356.9551249966025,503,1,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,45,0.6894170073792338,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,46,0.5587909836322069,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,47,0.4710420034825802,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,48,0.42462500277906656,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,49,0.4183329874649644,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,50,0.356583041138947,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,51,0.35099999513477087,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,52,0.3361250273883343,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,53,0.33000000985339284,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,54,0.3262910176999867,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,55,0.32354099676012993,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,56,0.3136249724775553,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,57,0.31770800705999136,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,58,0.31949998810887337,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,59,0.3195000463165343,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,60,0.3559580072760582,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,61,0.49358303658664227,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,62,0.43399998685345054,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,63,0.45645801583305,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,64,0.41958404472097754,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,65,0.38683402817696333,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,66,0.35458296770229936,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,67,0.3322089905850589,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,68,0.33175002317875624,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,69,0.6205420359037817,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,70,0.41204103035852313,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,71,0.3730420139618218,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,72,0.3670839942060411,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,73,0.40608301060274243,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,74,0.4174589994363487,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,75,0.39658299647271633,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,76,0.40391599759459496,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,77,0.4930839641019702,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,78,0.4325839690864086,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,79,0.40983303915709257,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,80,0.39583403849974275,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,81,0.5980420392006636,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,82,0.4075000179000199,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,83,0.5399159854277968,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,84,0.4555420018732548,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,85,0.36404101410880685,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,86,0.33300003269687295,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,87,0.3280409728176892,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,88,0.31875004060566425,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,89,0.32408302649855614,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,90,0.32416597241535783,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,91,0.3141250344924629,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,92,0.32337504671886563,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,93,0.3165419911965728,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,94,0.3160829655826092,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,95,0.31804200261831284,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,96,0.33545802580192685,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,97,0.3658750210888684,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,98,0.32216700492426753,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,99,0.31641701934859157,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,100,0.31454203417524695,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,101,0.31533301807940006,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,102,0.3176670288667083,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,103,0.31224999111145735,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,104,0.31408300856128335,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,105,0.31412497628480196,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,106,0.3177500329911709,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,107,0.31358300475403666,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,108,0.3155419835820794,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,109,0.31512504210695624,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,110,0.3165420494042337,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,111,0.3969579702243209,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,112,0.5323750083334744,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,113,0.40024996269494295,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,114,0.3422499867156148,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,115,0.3310419851914048,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,116,0.32295798882842064,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,117,0.32341701444238424,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,118,0.32829202245920897,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,119,0.3253340255469084,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,120,0.3172080032527447,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,121,0.3144999500364065,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,122,1.5550840180367231,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,123,0.36758300848305225,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,124,0.3242500242777169,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,125,0.31541602220386267,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,126,0.3347909660078585,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,127,0.3165419911965728,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,128,0.31116604804992676,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,129,0.309124996419996,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,130,0.32049999572336674,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,131,0.317458005156368,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,132,0.31400000443682075,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,133,0.30329194851219654,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,134,0.3394160303287208,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,135,0.3311249893158674,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,136,0.317458005156368,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,137,0.3137500025331974,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,138,0.3405419993214309,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,139,0.3172499709762633,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,140,0.30212500132620335,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,141,0.3061660099774599,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,142,0.3084579948335886,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,143,0.3090419922955334,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,144,0.3060000017285347,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,145,0.3040839801542461,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,146,0.3056660061702132,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,147,0.3067500074394047,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,148,0.35612500505521894,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,149,0.3452500095590949,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,150,0.32408401602879167,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,151,0.33020798582583666,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,152,0.3141670022159815,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,153,0.31224999111145735,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,154,0.31216698698699474,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,155,0.3049579681828618,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,156,0.3072079853154719,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,157,0.31350000062957406,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,158,0.31354103703051805,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,159,0.31337502878159285,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,160,0.309124996419996,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,161,0.3049160004593432,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,162,0.3097499720752239,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,163,0.3261249512434006,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,164,0.31291699269786477,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,165,0.3119170432910323,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,166,0.3095829742960632,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,167,0.3287910367362201,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,168,0.30462502036243677,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,169,0.30399998649954796,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,170,0.3117500455118716,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,171,0.3109159879386425,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,172,0.32316596480086446,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,173,0.3071250393986702,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,174,0.30387501465156674,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,175,0.30529097421094775,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,176,0.30524999601766467,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,177,0.3141670022159815,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,178,0.3077500150538981,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,179,0.30745804542675614,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,180,0.30583300394937396,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,181,0.3755420329980552,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,182,0.31958299223333597,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,183,0.3165840171277523,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,184,0.31583296367898583,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,185,0.31933299032971263,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,186,0.3189999843016267,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,187,0.3210410359315574,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,188,0.3273749607615173,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,189,0.3190410207025707,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,190,0.31958299223333597,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,191,0.3139579785056412,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,192,0.3164589870721102,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,193,0.32116600777953863,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,194,0.31341699650511146,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,195,0.33549999352544546,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,196,0.31308300094679,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,197,0.31924998620525,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,198,0.350042013451457,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,groq,llama-3.1-8b-instant,199,0.3357499954290688,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,0,0.6618340266868472,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,1,0.4360000020824373,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,2,0.4065419780090451,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,3,0.4111669841222465,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,4,0.38366694934666157,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,5,0.37345802411437035,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,6,0.38483296521008015,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,7,0.3682500100694597,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,8,0.38462504744529724,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,9,0.3832500078715384,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,10,0.37475000135600567,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,11,0.38833299186080694,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,12,0.4124999977648258,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,13,0.407207990065217,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,14,0.329374975990504,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,15,0.3066670033149421,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,16,0.30562496976926923,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,17,0.29749999521300197,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,18,0.3093340201303363,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,19,0.2965419553220272,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,20,0.30345801496878266,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,21,0.307333015371114,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,22,0.2954580122604966,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,23,0.3019159776158631,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,24,0.31166599364951253,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,25,0.3309999592602253,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,26,0.3374170046299696,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,27,0.3234579926356673,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,28,0.30512496596202254,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,29,0.3096659784205258,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,30,0.31991698779165745,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,31,0.3102499758824706,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,32,0.3055830020457506,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,33,0.31220901291817427,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,34,0.30883302679285407,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,35,0.3074160194955766,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,36,0.3073749830946326,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,37,0.30270800925791264,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,38,0.39558298885822296,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,39,0.5949580227024853,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,40,0.4207500023767352,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,41,0.3507080255076289,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,42,0.3518330049701035,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,43,0.3309579915367067,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,44,0.3212920273654163,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,45,0.3207920235581696,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,46,0.31650002347305417,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,47,0.3154580481350422,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,48,0.3071249811910093,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,49,0.30929199419915676,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,50,0.31183299142867327,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,51,0.3066670033149421,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,52,0.3099170280620456,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,53,0.36854197969660163,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,54,0.4748330102302134,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,55,0.3743339912034571,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,56,0.3392920480109751,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,57,0.3255420015193522,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,58,0.32183300936594605,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,59,0.32062502577900887,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,60,0.31945796217769384,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,61,0.32412499422207475,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,62,0.32191601349040866,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,63,0.3183750086463988,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,64,0.3203750238753855,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,65,0.32175000524148345,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,66,0.31804200261831284,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,67,0.31654100166633725,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,68,0.3163329674862325,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,69,0.310958013869822,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,70,0.5162080051377416,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,71,0.40362501749768853,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,72,0.33783301478251815,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,73,0.3190000425092876,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,74,0.31808303901925683,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,75,0.3127079689875245,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,76,0.313791970256716,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,77,0.3178750048391521,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,78,0.32179098343476653,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,79,0.32112497137859464,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,80,0.346417014952749,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,81,0.32183300936594605,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,82,0.31174998730421066,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,83,0.30562496976926923,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,84,0.34658395452424884,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,85,0.3084170166403055,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,86,0.30987500213086605,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,87,0.30758301727473736,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,88,0.30404102290049195,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,89,0.3080409951508045,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,90,0.3112500417046249,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,91,0.310166971758008,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,92,0.30808296287432313,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,93,0.3056660061702132,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,94,0.8699999889358878,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,95,0.3209999995306134,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,96,0.3790420014411211,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,97,0.3361250273883343,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,98,0.32062502577900887,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,99,0.3191669820807874,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,100,0.32354198629036546,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,101,0.3133330028504133,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,102,0.3150409902445972,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,103,0.3137500025331974,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,104,0.31383300665766,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,105,0.31287502497434616,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,106,0.31166599364951253,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,107,0.31100003980100155,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,108,0.31279202084988356,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,109,0.3139579785056412,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,110,0.9147920063696802,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,111,0.8864589617587626,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,112,0.8484580321237445,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,113,0.619291968178004,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,114,0.5461249966174364,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,115,0.8047500159591436,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,116,0.4632920026779175,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,117,0.43299997923895717,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,118,0.8253750274889171,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,119,2.5494580040685833,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,120,0.37412496749311686,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,121,0.3284999984316528,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,122,0.3180000348947942,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,123,0.5031670443713665,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,124,0.3892499953508377,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,125,0.38429099367931485,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,126,0.3183330409228802,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,127,1.0924579692073166,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,128,0.8142499718815088,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,129,0.679791031870991,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,130,0.5615000263787806,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,131,0.5911249900236726,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,132,0.3534170100465417,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,133,0.3251250018365681,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,134,0.32004102831706405,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,135,0.31824997859075665,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,136,0.3150409902445972,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,137,0.3144170041196048,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,138,0.3133330028504133,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,139,0.31524995574727654,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,140,0.3122079651802778,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,141,0.31412497628480196,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,142,0.31279196264222264,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,143,0.3107080119661987,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,144,0.3096669679507613,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,145,0.31458301236853004,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,146,0.4267499898560345,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,147,0.3327499725855887,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,148,0.316666963044554,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,149,0.31779101118445396,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,150,0.31233299523591995,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,151,0.3072089748457074,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,152,0.31029200181365013,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,153,0.3113339771516621,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,154,0.30933297239243984,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,155,0.30841602711007,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,156,0.3096660366281867,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,157,0.31004101037979126,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,158,0.30404096469283104,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,159,0.3042920143343508,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,160,0.30337501084432006,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,161,0.30399998649954796,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,162,0.30845904257148504,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,163,0.4125409759581089,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,164,0.33954199170693755,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,165,0.31170801958069205,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,166,0.30845904257148504,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,167,0.31533295987173915,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,168,0.31266704900190234,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,169,0.30808401061221957,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,170,0.31533301807940006,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,171,0.31329196644946933,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,172,0.3056660061702132,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,173,0.306583009660244,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,174,0.3066670033149421,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,175,0.31099998159334064,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,176,0.3049579681828618,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,177,0.3070419770665467,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,178,0.3357080277055502,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,179,0.3073329571634531,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,180,0.3082919865846634,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,181,0.31216698698699474,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,182,0.3137089661322534,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,183,0.3101250040344894,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,184,0.3089579986408353,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,185,0.30629197135567665,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,186,0.3069589729420841,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,187,0.3049160004593432,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,188,0.30462496215477586,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,189,0.7672499632462859,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,190,0.30883296858519316,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,191,0.30387501465156674,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,192,0.4291249788366258,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,193,0.3411250072531402,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,194,0.318541016895324,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,195,0.3065000055357814,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,196,0.3047919599339366,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,197,0.30616699950769544,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,198,0.3043749602511525,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,groq,llama-3.1-8b-instant,199,0.3064589691348374,503,0,0,0,"{""error"":{""message"":""worker groq-llama-3.1-8b circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,0,5468.852457997855,503,2,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,1,5502.587916969787,503,2,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,2,5148.596125014592,503,2,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,3,0.6799589609727263,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,4,0.46187499538064003,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,5,0.4124579718336463,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,6,0.389791966881603,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,7,0.5898749805055559,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,8,0.44362503103911877,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,9,0.4583330010063946,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,10,0.396332994569093,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,11,0.34541700733825564,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,12,0.35441695945337415,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,13,0.417332979850471,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,shared_prefix,gemini,gemini-2.5-flash,14,0.389791966881603,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,0,0.7052909932099283,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,1,0.45016600051894784,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,2,0.40129199624061584,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,3,0.519749999511987,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,4,0.41079201037064195,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,5,0.3487080102786422,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,6,0.3452500095590949,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,7,0.327250047121197,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,8,0.3283339901827276,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,9,0.34212495665997267,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,10,0.3191669820807874,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,11,0.32229197677224874,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,12,0.3267499851062894,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,13,0.3219170030206442,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+gateway,diverse,gemini,gemini-2.5-flash,14,0.3136669984087348,503,0,0,0,"{""error"":{""message"":""worker gemini-2.5-flash circuit is open"",""type"":""circuit_open"",""code"":null}}"
+direct,shared_prefix,groq,llama-3.1-8b-instant,0,349.105957953725,200,0,8,70,
+direct,shared_prefix,groq,llama-3.1-8b-instant,1,7750.042749976274,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,2,7134.723792027216,200,3,39,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,3,7288.787750003394,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,4,308.69470903417096,200,0,10,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,5,404.021583031863,200,0,59,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,6,7250.085957988631,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,7,345.29708296759054,200,0,32,74,
+direct,shared_prefix,groq,llama-3.1-8b-instant,8,7102.6413749787025,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,9,7556.143207999412,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,10,2579.049959022086,200,1,45,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,11,405.87279200553894,200,0,30,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,12,407.09391701966524,200,0,41,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,13,7288.779333001003,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,14,384.05516697093844,200,0,34,68,
+direct,shared_prefix,groq,llama-3.1-8b-instant,15,7320.755624969024,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,16,4511.789667012636,200,2,33,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,17,7212.230874982197,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,18,7332.2467090329155,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,19,6792.454874957912,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,20,6953.77279195236,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,21,7178.3632499864325,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,22,6888.2904589991085,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,23,4639.604458003305,200,2,51,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,24,6983.217582979705,200,3,46,73,
+direct,shared_prefix,groq,llama-3.1-8b-instant,25,7106.624459032901,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,26,7035.723875043914,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,27,4479.736999957822,200,2,47,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,28,6952.0835829898715,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,29,6823.761250008829,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,30,7391.514500021003,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,31,6729.050207999535,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,32,6944.341125024948,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,33,7357.194542011712,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,34,7092.673041974194,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,35,6824.186166981235,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,36,6885.832833009772,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,37,6976.199875003658,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,38,6895.833207992837,200,3,41,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,39,7006.389583984856,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,40,4636.2364590168,200,2,46,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,41,7426.694875000976,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,42,6922.282374987844,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,43,7227.882834034972,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,44,6725.255458964966,200,3,50,68,
+direct,shared_prefix,groq,llama-3.1-8b-instant,45,7413.867209048476,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,46,7197.637290984858,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,47,7193.0058330181055,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,48,7233.854542020708,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,49,7004.802707990166,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,50,6711.386209004559,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,51,7391.224916966166,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,52,7153.118582966272,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,53,7173.688457987737,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,54,4680.1980410236865,200,2,40,73,
+direct,shared_prefix,groq,llama-3.1-8b-instant,55,7141.183917003218,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,56,4845.181500015315,200,2,41,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,57,6978.326875017956,200,3,44,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,58,6872.385291964747,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,59,7042.267292039469,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,60,6926.26791697694,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,61,6921.544416982215,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,62,7096.1203330080025,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,63,6759.198417013977,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,64,7071.547208004631,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,65,7326.018624997232,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,66,6939.12429199554,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,67,6928.578249993734,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,68,7260.022790986113,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,69,7057.479625043925,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,70,7541.558667027857,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,71,6958.294749958441,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,72,2348.7402080208994,200,1,41,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,73,7065.673707984388,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,74,7327.372583968099,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,75,6895.977708976716,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,76,7001.38045795029,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,77,6606.021374987904,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,78,7546.733500028495,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,79,7125.636624987237,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,80,7192.180083016865,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,81,7542.165707971435,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,82,2491.913458041381,200,1,35,74,
+direct,shared_prefix,groq,llama-3.1-8b-instant,83,7471.637082984671,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,84,7183.903958008159,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,85,7220.263833994977,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,86,2383.5264579975046,200,1,33,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,87,4642.965292034205,200,2,45,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,88,7250.73141703615,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,89,7392.7220000186935,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,90,6869.415458000731,200,3,8,70,
+direct,shared_prefix,groq,llama-3.1-8b-instant,91,6747.134374978486,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,92,7122.601457987912,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,93,7244.3740410381,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,94,7288.376457989216,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,95,7432.6092500123195,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,96,7058.116875006817,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,97,7086.877583002206,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,98,2798.794500005897,200,1,48,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,99,7373.8659170339815,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,100,7374.253416957799,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,101,7281.537499977276,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,102,6915.220249968115,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,103,7232.133999990765,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,104,6863.779416948091,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,105,2335.1700420025736,200,1,8,70,
+direct,shared_prefix,groq,llama-3.1-8b-instant,106,4563.749416964129,200,2,30,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,107,6698.94212501822,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,108,7014.666458999272,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,109,7429.444624984171,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,110,6600.356707989704,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,111,7119.7948330082,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,112,6684.625583002344,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,113,6971.268415974919,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,114,7139.492542017251,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,115,7040.57112504961,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,116,7181.789832946379,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,117,6862.108834029641,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,118,7479.842208034825,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,119,2504.7778339940123,200,1,42,68,
+direct,shared_prefix,groq,llama-3.1-8b-instant,120,7344.041291973554,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,121,6806.560583005194,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,122,4738.168625044636,200,2,46,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,123,2465.6914160004817,200,1,60,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,124,7130.201417021453,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,125,7301.717875001486,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,126,6825.869457970839,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,127,6828.045666974504,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,128,7477.278832986485,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,129,6981.609041977208,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,130,7503.872958011925,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,131,4681.058624992147,200,2,44,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,132,7139.973166980781,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,133,6902.127416979056,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,134,7023.968541005161,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,135,7417.90675005177,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,136,4785.74037499493,200,2,18,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,137,7012.172291986644,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,138,6838.153707969468,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,139,4672.512750024907,200,2,14,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,140,6861.8788329767995,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,141,7008.601332956459,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,142,6802.208750043064,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,143,7244.299333018716,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,144,7095.250416023191,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,145,7018.802415987011,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,146,4709.11504200194,200,2,30,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,147,6884.822333988268,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,148,7403.516999969725,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,149,6767.4629999673925,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,150,7408.934624982066,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,151,6630.42633398436,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,152,4695.835791004356,200,2,47,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,153,7280.1277919788845,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,154,7001.766540983226,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,155,4465.875792026054,200,2,28,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,156,7215.901833958924,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,157,7135.3063340066,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,158,7109.391875041183,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,159,6995.193584007211,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,160,7569.12800000282,200,3,50,69,
+direct,shared_prefix,groq,llama-3.1-8b-instant,161,5041.043083008844,200,2,28,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,162,7169.612458033953,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,163,6953.537833003793,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,164,7190.244500001427,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,165,7129.139875003602,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,166,7096.985834010411,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,167,7389.152624993585,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,168,7115.125375043135,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,169,7059.384916967247,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,170,6889.5846249652095,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,171,7350.926333980169,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,172,7170.6779999658465,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,173,6833.2262500189245,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,174,7029.80999997817,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,175,7090.486333996523,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,176,6946.102832967881,200,3,25,71,
+direct,shared_prefix,groq,llama-3.1-8b-instant,177,7480.290416977368,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,178,7183.208542002831,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,179,6891.094124992378,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,180,7039.629375038203,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,181,6735.129166976549,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,182,268.47762503894046,200,0,42,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,183,2449.806082993746,200,1,60,72,
+direct,shared_prefix,groq,llama-3.1-8b-instant,184,6894.367000029888,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,185,7185.667834011838,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,186,6730.051415972412,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,187,7374.577415990643,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,188,7357.26333304774,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,189,7334.6677920199,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,190,7312.38558399491,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,191,6583.231333992444,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,192,7112.086708017159,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,193,2827.089625003282,200,1,51,70,
+direct,shared_prefix,groq,llama-3.1-8b-instant,194,6990.333000023384,200,3,41,68,
+direct,shared_prefix,groq,llama-3.1-8b-instant,195,7199.902291002218,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,196,6994.901207974181,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,197,7122.386124974582,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,198,7027.12912496645,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,shared_prefix,groq,llama-3.1-8b-instant,199,2421.850666985847,200,1,14,72,
+direct,diverse,groq,llama-3.1-8b-instant,0,7069.27654199535,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,1,2344.0055000246502,200,1,30,82,
+direct,diverse,groq,llama-3.1-8b-instant,2,7089.066250016913,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,3,6994.686624966562,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,4,7331.334041955415,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,5,7504.628624999896,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,6,7418.486499984283,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,7,6871.852958051022,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,8,7645.714207959827,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,9,7362.219709029887,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,10,7328.359957959037,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,11,4524.4717500172555,200,2,31,79,
+direct,diverse,groq,llama-3.1-8b-instant,12,7327.6017919997685,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,13,7323.686750023626,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,14,6849.313582992181,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,15,7303.035375021864,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,16,2397.709082986694,200,1,18,82,
+direct,diverse,groq,llama-3.1-8b-instant,17,7522.508708003443,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,18,2427.176166966092,200,1,60,84,
+direct,diverse,groq,llama-3.1-8b-instant,19,7357.158874976449,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,20,4635.082499997225,200,2,23,82,
+direct,diverse,groq,llama-3.1-8b-instant,21,7273.571124998853,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,22,7291.880917036906,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,23,7345.271333004348,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,24,6948.318334005307,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,25,6772.679041023366,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,26,7162.42012497969,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,27,7335.190292040352,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,28,7050.3241249825805,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,29,7638.21512501454,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,30,6940.2556660352275,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,31,7154.612333048135,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,32,4556.434667028952,200,2,46,84,
+direct,diverse,groq,llama-3.1-8b-instant,33,7543.612625042442,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,34,4762.876416963991,200,2,9,83,
+direct,diverse,groq,llama-3.1-8b-instant,35,2305.594999983441,200,1,30,79,
+direct,diverse,groq,llama-3.1-8b-instant,36,7363.401542010251,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,37,7424.514749960508,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,38,7388.663791003637,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,39,7098.365124955308,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,40,7024.29133298574,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,41,7219.196749967523,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,42,6787.049875012599,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,43,7596.199541003443,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,44,6891.196541022509,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,45,7226.7857500119135,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,46,6747.048125020228,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,47,7339.288916962687,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,48,7418.348499981221,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,49,2393.660292029381,200,1,14,82,
+direct,diverse,groq,llama-3.1-8b-instant,50,7300.7807090179995,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,51,2494.7989170323126,200,1,33,80,
+direct,diverse,groq,llama-3.1-8b-instant,52,7078.202624979895,200,3,46,85,
+direct,diverse,groq,llama-3.1-8b-instant,53,4629.370707960334,200,2,46,76,
+direct,diverse,groq,llama-3.1-8b-instant,54,6812.953540997114,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,55,7075.447166047525,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,56,7473.146625037771,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,57,6811.838958994485,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,58,7038.451291969977,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,59,7034.038334037177,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,60,7053.907957975753,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,61,7110.311291995458,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,62,6535.396874998696,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,63,6982.3371669626795,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,64,6886.9389580213465,200,3,9,82,
+direct,diverse,groq,llama-3.1-8b-instant,65,6737.931458977982,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,66,7718.302166031208,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,67,7249.44691703422,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,68,7389.153334021103,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,69,6990.954415989108,200,3,48,82,
+direct,diverse,groq,llama-3.1-8b-instant,70,7519.978875003289,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,71,7073.57291696826,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,72,6854.347874992527,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,73,6830.87974996306,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,74,6691.216917010024,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,75,7209.776750009041,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,76,7269.646707980428,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,77,6738.332875014748,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,78,7439.647708029952,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,79,2371.295541001018,200,1,10,82,
+direct,diverse,groq,llama-3.1-8b-instant,80,7165.775540983304,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,81,4585.900207981467,200,2,31,82,
+direct,diverse,groq,llama-3.1-8b-instant,82,6759.909416956361,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,83,7312.298292003106,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,84,6983.352041977923,200,3,42,83,
+direct,diverse,groq,llama-3.1-8b-instant,85,7057.105290994514,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,86,7156.480083009228,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,87,6824.122166028246,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,88,7108.6478749639355,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,89,7500.792499980889,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,90,6703.475666989107,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,91,6871.548917028122,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,92,7560.072292049881,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,93,7146.726209030021,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,94,2287.3636669828556,200,1,7,80,
+direct,diverse,groq,llama-3.1-8b-instant,95,7149.870124994777,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,96,7320.160458039027,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,97,7327.223459025845,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,98,7462.866624991875,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,99,6844.8808749672025,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,100,7448.802916973364,200,3,47,79,
+direct,diverse,groq,llama-3.1-8b-instant,101,2464.771291008219,200,1,38,82,
+direct,diverse,groq,llama-3.1-8b-instant,102,7251.6567499842495,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,103,7109.425167029258,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,104,4549.600541999098,200,2,38,78,
+direct,diverse,groq,llama-3.1-8b-instant,105,6893.5428749537095,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,106,7182.194375025574,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,107,6860.680999991018,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,108,6955.576041014865,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,109,6717.644083022606,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,110,7155.640916957054,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,111,7209.749832982197,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,112,6997.603667026851,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,113,2527.7306669740938,200,1,50,78,
+direct,diverse,groq,llama-3.1-8b-instant,114,7495.172834023833,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,115,7305.149917025119,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,116,6923.223333025817,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,117,7282.773832965177,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,118,7249.502041027881,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,119,2329.7240000101738,200,1,47,81,
+direct,diverse,groq,llama-3.1-8b-instant,120,7191.813167009968,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,121,2302.4790000054054,200,1,25,83,
+direct,diverse,groq,llama-3.1-8b-instant,122,7273.184207966551,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,123,7427.977208979428,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,124,7061.779582989402,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,125,7144.856500031892,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,126,2442.4185000243597,200,1,39,83,
+direct,diverse,groq,llama-3.1-8b-instant,127,7349.41629099194,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,128,7057.296334009152,200,3,41,80,
+direct,diverse,groq,llama-3.1-8b-instant,129,6941.177875036374,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,130,7202.118082961533,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,131,2536.411458044313,200,1,45,82,
+direct,diverse,groq,llama-3.1-8b-instant,132,6941.920207988005,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,133,6700.402209011372,200,3,37,79,
+direct,diverse,groq,llama-3.1-8b-instant,134,7113.346625003032,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,135,7152.679749997333,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,136,7449.060459039174,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,137,7061.696458025835,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,138,7126.634459011257,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,139,7104.807040945161,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,140,6726.176791999023,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,141,6974.301291978918,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,142,6713.3431659894995,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,143,7249.8646669555455,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,144,4685.546291992068,200,2,40,83,
+direct,diverse,groq,llama-3.1-8b-instant,145,7365.1449590106495,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,146,6927.95041698264,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,147,7515.107125043869,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,148,6992.399667040445,200,3,49,78,
+direct,diverse,groq,llama-3.1-8b-instant,149,6917.764999961946,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,150,2438.6754159932025,200,1,8,78,
+direct,diverse,groq,llama-3.1-8b-instant,151,7096.703040995635,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,152,7099.5552919921465,200,3,35,81,
+direct,diverse,groq,llama-3.1-8b-instant,153,6839.372833026573,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,154,7077.332207991276,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,155,7135.269584017806,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,156,7345.271042024251,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,157,7487.550708989147,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,158,7136.463499977253,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,159,7165.856207953766,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,160,7079.489374998957,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,161,7300.928541983012,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,162,7051.654499955475,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,163,4758.279500005301,200,2,43,78,
+direct,diverse,groq,llama-3.1-8b-instant,164,7138.328291999642,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,165,7080.85349999601,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,166,7158.474583993666,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,167,4773.726166982669,200,2,24,81,
+direct,diverse,groq,llama-3.1-8b-instant,168,6832.92125002481,200,3,60,85,
+direct,diverse,groq,llama-3.1-8b-instant,169,7347.931833995972,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,170,6560.10524998419,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,171,6929.339374997653,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,172,6853.515458991751,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,173,6659.820542030502,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,174,7413.533959013876,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,175,6828.677167010028,200,3,44,80,
+direct,diverse,groq,llama-3.1-8b-instant,176,6959.790457971394,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,177,7059.589667012915,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,178,7061.073292046785,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,179,7149.4973749504425,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,180,7073.112124984618,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,181,7386.509542004205,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,182,7063.869041972794,200,3,54,81,
+direct,diverse,groq,llama-3.1-8b-instant,183,6876.352999999654,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,184,7039.756624959409,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,185,6805.572999990545,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,186,7043.102416035254,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,187,6935.786874964833,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,188,6990.847542008851,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,189,2386.569042049814,200,1,33,84,
+direct,diverse,groq,llama-3.1-8b-instant,190,7192.479958001059,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,191,7150.368417031132,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,192,6710.3672079974785,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,193,6804.579874966294,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,194,6830.937666003592,200,3,32,80,
+direct,diverse,groq,llama-3.1-8b-instant,195,6681.179750012234,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,196,6902.679374965373,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,197,7372.84141703276,429,4,0,0,"{""error"":{""message"":""Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01krpfc9zaey7s33akzaqa9ma2` service tier `on_demand` on requests per minute (RPM): Limit 30, Used 30, Requ"
+direct,diverse,groq,llama-3.1-8b-instant,198,2428.4724579774775,200,1,60,81,
+direct,diverse,groq,llama-3.1-8b-instant,199,7057.302041037474,200,3,14,82,
+direct,shared_prefix,gemini,gemini-2.5-flash,0,9818.555500009097,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,1,10324.053000018466,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,2,10795.613916008733,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,3,9698.26750003267,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,4,9561.629665957298,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,5,10163.981541991234,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,6,9749.585458950605,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,7,10720.00566701172,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,8,9643.913833016995,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,9,10535.72066698689,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,10,9565.93124999199,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,11,10154.427665984258,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,12,9329.547332949005,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,13,9340.670874982607,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,shared_prefix,gemini,gemini-2.5-flash,14,10108.448999992106,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,0,9781.138000020292,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,1,9701.360083010513,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,2,11012.264999968465,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,3,9838.408957992215,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,4,9829.860292025842,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,5,10287.637375004124,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,6,9750.208332960028,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,7,9938.526041980367,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,8,9631.474125024397,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,9,9260.887292039115,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,10,10374.889042053837,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,11,10362.498291011434,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,12,9999.86354203429,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,13,9905.448124976829,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"
+direct,diverse,gemini,gemini-2.5-flash,14,9744.314542040229,429,4,0,0,"[{
+  ""error"": {
+    ""code"": 429,
+    ""message"": ""You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-"

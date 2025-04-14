@@ -1,0 +1,11 @@
+{
+  "timestamp": "20260515-195801",
+  "classes": [
+    "SharedPromptGroqUser",
+    "DiverseGroqUser",
+    "ConversationalGroqUser"
+  ],
+  "users": 20,
+  "spawn_rate": 5,
+  "duration_s": 45
+}

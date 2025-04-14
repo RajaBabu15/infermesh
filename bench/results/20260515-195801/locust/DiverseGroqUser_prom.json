@@ -1,0 +1,645 @@
+{
+  "user_class": "DiverseGroqUser",
+  "users": 20,
+  "spawn_rate": 5,
+  "duration_s": 45,
+  "prom_t0": {
+    "infermesh_requests": [],
+    "infermesh_kv_cache_hits": [],
+    "infermesh_kv_cache_misses": [],
+    "infermesh_circuit_breaker_opens": [],
+    "infermesh_redis_events_received": [],
+    "infermesh_redis_events_dropped": [],
+    "infermesh_request_duration_seconds": [],
+    "infermesh_routing_decision_seconds": [],
+    "infermesh_active_sessions": [
+      {
+        "labels": {},
+        "value": 0.0
+      }
+    ],
+    "infermesh_trie_entries": [
+      {
+        "labels": {},
+        "value": 0.0
+      }
+    ],
+    "infermesh_worker_tokens_in_flight": [
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.3-70b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-2.5-flash"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-flash-latest"
+        },
+        "value": 0.0
+      }
+    ],
+    "infermesh_worker_cache_utilization": [
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.3-70b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-2.5-flash"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-flash-latest"
+        },
+        "value": 0.0
+      }
+    ],
+    "infermesh_workers_healthy": [
+      {
+        "labels": {
+          "model": "llama-3.1-8b-instant",
+          "role": "mixed"
+        },
+        "value": 1.0
+      },
+      {
+        "labels": {
+          "model": "llama-3.3-70b-versatile",
+          "role": "mixed"
+        },
+        "value": 1.0
+      },
+      {
+        "labels": {
+          "model": "gemini-2.5-flash",
+          "role": "mixed"
+        },
+        "value": 1.0
+      },
+      {
+        "labels": {
+          "model": "gemini-flash-latest",
+          "role": "mixed"
+        },
+        "value": 1.0
+      }
+    ]
+  },
+  "prom_t1": {
+    "infermesh_requests": [
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "status": "success"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "status": "upstream_4xx"
+        },
+        "value": 14.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "status": "circuit_open"
+        },
+        "value": 902.0
+      }
+    ],
+    "infermesh_requests_created": [
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "status": "success"
+        },
+        "value": 1778875138.45804
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "status": "upstream_4xx"
+        },
+        "value": 1778875139.012161
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "status": "circuit_open"
+        },
+        "value": 1778875139.647922
+      }
+    ],
+    "infermesh_kv_cache_hits": [
+      {
+        "labels": {
+          "model": "llama-3.1-8b-instant",
+          "source": "trie"
+        },
+        "value": 339.0
+      }
+    ],
+    "infermesh_kv_cache_hits_created": [
+      {
+        "labels": {
+          "model": "llama-3.1-8b-instant",
+          "source": "trie"
+        },
+        "value": 1778875139.125288
+      }
+    ],
+    "infermesh_kv_cache_misses": [
+      {
+        "labels": {
+          "model": "llama-3.1-8b-instant"
+        },
+        "value": 598.0
+      }
+    ],
+    "infermesh_kv_cache_misses_created": [
+      {
+        "labels": {
+          "model": "llama-3.1-8b-instant"
+        },
+        "value": 1778875138.123751
+      }
+    ],
+    "infermesh_circuit_breaker_opens": [
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 2.0
+      }
+    ],
+    "infermesh_circuit_breaker_opens_created": [
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 1778875139.2142222
+      }
+    ],
+    "infermesh_redis_events_received": [],
+    "infermesh_redis_events_dropped": [],
+    "infermesh_request_duration_seconds": [
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "0.01",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "0.05",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "0.1",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "0.25",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 10.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "0.5",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "1.0",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "2.5",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "5.0",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "10.0",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "30.0",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "60.0",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "120.0",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "le": "+Inf",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 21.0
+      },
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 5.557112789247185
+      }
+    ],
+    "infermesh_request_duration_seconds_created": [
+      {
+        "labels": {
+          "endpoint": "/v1/chat/completions",
+          "model": "llama-3.1-8b-instant",
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 1778875138.457933
+      }
+    ],
+    "infermesh_routing_decision_seconds": [
+      {
+        "labels": {
+          "le": "1e-05",
+          "router": "kv_aware"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "le": "5e-05",
+          "router": "kv_aware"
+        },
+        "value": 45.0
+      },
+      {
+        "labels": {
+          "le": "0.0001",
+          "router": "kv_aware"
+        },
+        "value": 193.0
+      },
+      {
+        "labels": {
+          "le": "0.0005",
+          "router": "kv_aware"
+        },
+        "value": 936.0
+      },
+      {
+        "labels": {
+          "le": "0.001",
+          "router": "kv_aware"
+        },
+        "value": 936.0
+      },
+      {
+        "labels": {
+          "le": "0.005",
+          "router": "kv_aware"
+        },
+        "value": 937.0
+      },
+      {
+        "labels": {
+          "le": "0.01",
+          "router": "kv_aware"
+        },
+        "value": 937.0
+      },
+      {
+        "labels": {
+          "le": "0.1",
+          "router": "kv_aware"
+        },
+        "value": 937.0
+      },
+      {
+        "labels": {
+          "le": "1.0",
+          "router": "kv_aware"
+        },
+        "value": 937.0
+      },
+      {
+        "labels": {
+          "le": "+Inf",
+          "router": "kv_aware"
+        },
+        "value": 937.0
+      },
+      {
+        "labels": {
+          "router": "kv_aware"
+        },
+        "value": 937.0
+      },
+      {
+        "labels": {
+          "router": "kv_aware"
+        },
+        "value": 0.11817845969926566
+      }
+    ],
+    "infermesh_routing_decision_seconds_created": [
+      {
+        "labels": {
+          "router": "kv_aware"
+        },
+        "value": 1778875138.1237051
+      }
+    ],
+    "infermesh_active_sessions": [
+      {
+        "labels": {},
+        "value": 0.0
+      }
+    ],
+    "infermesh_trie_entries": [
+      {
+        "labels": {},
+        "value": 21.0
+      }
+    ],
+    "infermesh_worker_tokens_in_flight": [
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 78551.0
+      },
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.3-70b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-2.5-flash"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-flash-latest"
+        },
+        "value": 0.0
+      }
+    ],
+    "infermesh_worker_cache_utilization": [
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.1-8b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "groq-llama-3.3-70b"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-2.5-flash"
+        },
+        "value": 0.0
+      },
+      {
+        "labels": {
+          "worker_id": "gemini-flash-latest"
+        },
+        "value": 0.0
+      }
+    ],
+    "infermesh_workers_healthy": [
+      {
+        "labels": {
+          "model": "llama-3.1-8b-instant",
+          "role": "mixed"
+        },
+        "value": 1.0
+      },
+      {
+        "labels": {
+          "model": "llama-3.3-70b-versatile",
+          "role": "mixed"
+        },
+        "value": 1.0
+      },
+      {
+        "labels": {
+          "model": "gemini-2.5-flash",
+          "role": "mixed"
+        },
+        "value": 1.0
+      },
+      {
+        "labels": {
+          "model": "gemini-flash-latest",
+          "role": "mixed"
+        },
+        "value": 1.0
+      }
+    ]
+  },
+  "health_t0": {
+    "status": "ok",
+    "workers": 4,
+    "worker_loads": [
+      {
+        "id": "groq-llama-3.1-8b",
+        "model": "llama-3.1-8b-instant",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      },
+      {
+        "id": "groq-llama-3.3-70b",
+        "model": "llama-3.3-70b-versatile",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "model": "gemini-2.5-flash",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      },
+      {
+        "id": "gemini-flash-latest",
+        "model": "gemini-flash-latest",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      }
+    ],
+    "trie_entries": 0,
+    "cache_hits_total": 0,
+    "redis_enabled": false,
+    "redis_transport": null,
+    "disaggregation_enabled": false,
+    "prometheus_enabled": true,
+    "otel_enabled": false
+  },
+  "health_t1": {
+    "status": "ok",
+    "workers": 4,
+    "worker_loads": [
+      {
+        "id": "groq-llama-3.1-8b",
+        "model": "llama-3.1-8b-instant",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 78551,
+        "cache_utilization": 0.0,
+        "circuit_state": "OPEN"
+      },
+      {
+        "id": "groq-llama-3.3-70b",
+        "model": "llama-3.3-70b-versatile",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "model": "gemini-2.5-flash",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      },
+      {
+        "id": "gemini-flash-latest",
+        "model": "gemini-flash-latest",
+        "type": "openai",
+        "role": "mixed",
+        "tokens_in_flight": 0,
+        "cache_utilization": 0.0,
+        "circuit_state": "CLOSED"
+      }
+    ],
+    "trie_entries": 21,
+    "cache_hits_total": 8,
+    "redis_enabled": false,
+    "redis_transport": null,
+    "disaggregation_enabled": false,
+    "prometheus_enabled": true,
+    "otel_enabled": false
+  }
+}

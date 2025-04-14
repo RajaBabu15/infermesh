@@ -1,0 +1,71 @@
+{
+  "SharedPromptGroqUser": {
+    "requests": 892,
+    "failures": 847,
+    "rps": 21.174790271577052,
+    "median_ms": 4.0,
+    "p95_ms": 180.0,
+    "p99_ms": 370.0,
+    "mean_ms": 20.66273823378643,
+    "gateway_routed": 903,
+    "gateway_cache_hits": 893,
+    "gateway_cache_misses": 10,
+    "gateway_cache_hit_rate_pct": 98.9,
+    "circuit_breaker_opens": 2,
+    "by_status": {
+      "success": 45.0,
+      "circuit_open": 846.0,
+      "upstream_4xx": 12.0,
+      "upstream_5xx": 0,
+      "timeout": 0,
+      "worker_unavailable": 0,
+      "stream_error": 0
+    }
+  },
+  "DiverseGroqUser": {
+    "requests": 925,
+    "failures": 904,
+    "rps": 20.998640027360743,
+    "median_ms": 4.0,
+    "p95_ms": 5.0,
+    "p99_ms": 290.0,
+    "mean_ms": 10.93855158167866,
+    "gateway_routed": 937,
+    "gateway_cache_hits": 339,
+    "gateway_cache_misses": 598,
+    "gateway_cache_hit_rate_pct": 36.2,
+    "circuit_breaker_opens": 2,
+    "by_status": {
+      "success": 21.0,
+      "circuit_open": 902.0,
+      "upstream_4xx": 14.0,
+      "upstream_5xx": 0,
+      "timeout": 0,
+      "worker_unavailable": 0,
+      "stream_error": 0
+    }
+  },
+  "ConversationalGroqUser": {
+    "requests": 685,
+    "failures": 663,
+    "rps": 15.534120859838096,
+    "median_ms": 4.0,
+    "p95_ms": 82.0,
+    "p99_ms": 300.0,
+    "mean_ms": 14.87534744580052,
+    "gateway_routed": 696,
+    "gateway_cache_hits": 473,
+    "gateway_cache_misses": 223,
+    "gateway_cache_hit_rate_pct": 68.0,
+    "circuit_breaker_opens": 2,
+    "by_status": {
+      "success": 22.0,
+      "circuit_open": 653.0,
+      "upstream_4xx": 21.0,
+      "upstream_5xx": 0,
+      "timeout": 0,
+      "worker_unavailable": 0,
+      "stream_error": 0
+    }
+  }
+}
