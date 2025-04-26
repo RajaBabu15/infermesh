@@ -36,10 +36,13 @@ def _request_id(request: Request) -> str:
     return request.headers.get("X-Request-ID") or str(uuid.uuid4())
 
 
-def _error_response(status: int, type_: str, message: str) -> JSONResponse:
+def _error_response(
+    status: int, type_: str, message: str, headers: dict[str, str] | None = None
+) -> JSONResponse:
     return JSONResponse(
         status_code=status,
         content=ErrorResponse(error=ErrorDetail(message=message, type=type_)).model_dump(),
+        headers=headers,
     )
 
 
@@ -143,6 +146,10 @@ async def chat_completions(request: Request) -> Response:
     def _on_complete(est: int) -> None:
         worker.tokens_in_flight = max(0, worker.tokens_in_flight - est)
 
+    # Session header is returned on every response (incl. errors) so a
+    # conversational client keeps its sticky session across upstream failures.
+    sess_hdr = {config.session_header_name: response_sid} if response_sid else None
+
     try:
         if stream:
             prefix = RadixTrie.extract_prefix(messages)
@@ -229,17 +236,17 @@ async def chat_completions(request: Request) -> Response:
         metrics.requests_total.labels(
             endpoint="/v1/chat/completions", model=model, status="circuit_open",
         ).inc()
-        return _error_response(503, "circuit_open", f"worker {exc.worker_id} circuit is open")
+        return _error_response(503, "circuit_open", f"worker {exc.worker_id} circuit is open", headers=sess_hdr)
     except WorkerTimeoutError as exc:
         metrics.requests_total.labels(
             endpoint="/v1/chat/completions", model=model, status="timeout",
         ).inc()
-        return _error_response(504, "timeout", f"worker {exc.worker_id} timed out")
+        return _error_response(504, "timeout", f"worker {exc.worker_id} timed out", headers=sess_hdr)
     except WorkerUnavailableError as exc:
         metrics.requests_total.labels(
             endpoint="/v1/chat/completions", model=model, status="worker_unavailable",
         ).inc()
-        return _error_response(503, "worker_unavailable", f"worker {exc.worker_id} unreachable")
+        return _error_response(503, "worker_unavailable", f"worker {exc.worker_id} unreachable", headers=sess_hdr)
     except WorkerHTTPError as exc:
         status = "upstream_4xx" if 400 <= exc.status_code < 500 else "upstream_5xx"
         metrics.requests_total.labels(
@@ -247,8 +254,8 @@ async def chat_completions(request: Request) -> Response:
         ).inc()
         # Pass 4xx through unchanged so the client sees the upstream error.
         if 400 <= exc.status_code < 500:
-            return Response(content=exc.body, status_code=exc.status_code, media_type="application/json")
-        return _error_response(502, "upstream_error", f"worker {exc.worker_id} returned {exc.status_code}")
+            return Response(content=exc.body, status_code=exc.status_code, media_type="application/json", headers=sess_hdr)
+        return _error_response(502, "upstream_error", f"worker {exc.worker_id} returned {exc.status_code}", headers=sess_hdr)
 
 
 @router.post("/v1/completions")
@@ -450,18 +457,24 @@ async def metrics_endpoint(request: Request) -> Response:
     """Prometheus scrape. Refreshes app-state gauges on each call."""
     registry: WorkerRegistry = request.app.state.registry
     trie: RadixTrie = request.app.state.trie
+    proxy: HttpProxy = request.app.state.proxy
     sessions: SessionTracker | None = getattr(request.app.state, "sessions", None)
 
     metrics.trie_entries.set(trie.entry_count())
     if sessions is not None:
         metrics.active_sessions.set(sessions.session_count())
 
+    # workers_healthy counts only workers whose breaker is not OPEN, so the
+    # gauge reflects real availability rather than the static registry size.
+    breaker_states = proxy.breaker_states()
     role_counts: dict[tuple[str, str], int] = {}
     for w in registry.all_workers():
         metrics.worker_tokens_in_flight.labels(worker_id=w.id).set(w.tokens_in_flight)
         metrics.worker_cache_utilization.labels(worker_id=w.id).set(w.cache_utilization)
         key = (w.model, w.role)
-        role_counts[key] = role_counts.get(key, 0) + 1
+        role_counts.setdefault(key, 0)
+        if breaker_states.get(w.id, "CLOSED") != "OPEN":
+            role_counts[key] += 1
     for (model, role), count in role_counts.items():
         metrics.workers_healthy.labels(model=model, role=role).set(count)
 

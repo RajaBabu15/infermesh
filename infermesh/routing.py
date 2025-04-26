@@ -252,10 +252,16 @@ def _kv_aware_pick(
     model: str,
     prefix: str,
     pool: list["WorkerConfig"],
+    min_match: int = 0,
 ) -> "WorkerConfig | None":
-    """Longest-prefix lookup restricted to a worker pool."""
+    """Longest-prefix lookup restricted to a worker pool.
+
+    A match counts only when its depth reaches at least max(1, min_match)
+    characters, so operators can require a substantial shared prefix rather
+    than treating any 1-char overlap as a cache hit.
+    """
     worker_id, depth = trie.longest_prefix_match(model, prefix)
-    if worker_id and depth > 0:
+    if worker_id and depth >= max(1, min_match):
         return next((w for w in pool if w.id == worker_id), None)
     return None
 
@@ -330,7 +336,7 @@ class KVAwareRouter:
         if prefix is None:
             prefix = RadixTrie.extract_prefix(messages)
         pool = self._registry.get_workers(model)
-        matched = _kv_aware_pick(self._trie, model, prefix, pool)
+        matched = _kv_aware_pick(self._trie, model, prefix, pool, self._config.kv_match_min_chars)
         if matched is not None:
             return matched, True
         return self._p2c.select(model), False
@@ -444,7 +450,7 @@ class DisaggregatedRouter:
         if not pool:
             raise NoWorkersAvailable(model)
         prefix = RadixTrie.extract_prefix(messages)
-        matched = _kv_aware_pick(self._trie, model, prefix, pool)
+        matched = _kv_aware_pick(self._trie, model, prefix, pool, self._config.kv_match_min_chars)
         if matched is not None:
             return matched, True
         return self._p2c_within(pool), False

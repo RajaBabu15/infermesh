@@ -1,0 +1,6 @@
+workers:
+  - id: test-vllm
+    type: vllm
+    url: http://127.0.0.1:9999
+    model: test-model
+    api_key_env: INFERMESH_TEST_NO_KEY

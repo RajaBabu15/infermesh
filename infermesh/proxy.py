@@ -55,6 +55,18 @@ class WorkerHTTPError(WorkerError):
 # Circuit breaker
 # ---------------------------------------------------------------------------
 
+def is_breaker_failure(status_code: int) -> bool:
+    """Whether an upstream HTTP status reflects worker *health* (should trip
+    the breaker) versus a client/config error that does not.
+
+    5xx and 429 (overload) indicate the worker is unhealthy or shedding load.
+    Other 4xx (400/401/403/404/422) mean the worker answered fine and the
+    request itself was rejected — those must NOT open the circuit, otherwise an
+    expired API key or a malformed request takes the whole worker offline.
+    """
+    return status_code >= 500 or status_code == 429
+
+
 @dataclass
 class CircuitBreaker:
     failure_threshold: int = 5
@@ -62,29 +74,46 @@ class CircuitBreaker:
     state: Literal["CLOSED", "OPEN", "HALF_OPEN"] = "CLOSED"
     failure_count: int = 0
     opened_at: float = field(default=0.0)
+    # True while a single HALF_OPEN probe is outstanding; gates concurrent
+    # callers so only one request is admitted to test recovery.
+    half_open_inflight: bool = False
 
     def allow_request(self) -> bool:
         if self.state == "CLOSED":
             return True
         if self.state == "OPEN":
             if time.monotonic() - self.opened_at >= self.recovery_timeout_s:
+                # Transition to HALF_OPEN and admit exactly one probe.
                 self.state = "HALF_OPEN"
+                self.half_open_inflight = True
                 return True
             return False
-        # HALF_OPEN: allow one probe.
+        # HALF_OPEN: admit a single probe at a time; reject the rest.
+        if self.half_open_inflight:
+            return False
+        self.half_open_inflight = True
         return True
 
     def record_success(self) -> None:
         self.failure_count = 0
         self.state = "CLOSED"
+        self.half_open_inflight = False
 
     def record_failure(self, worker_id: str = "") -> None:
+        # A failed probe in HALF_OPEN re-opens the circuit immediately.
+        if self.state == "HALF_OPEN":
+            self._open(worker_id)
+            return
         self.failure_count += 1
         if self.failure_count >= self.failure_threshold and self.state != "OPEN":
-            self.state = "OPEN"
-            self.opened_at = time.monotonic()
-            if worker_id:
-                metrics.circuit_breaker_opens_total.labels(worker_id=worker_id).inc()
+            self._open(worker_id)
+
+    def _open(self, worker_id: str = "") -> None:
+        self.state = "OPEN"
+        self.opened_at = time.monotonic()
+        self.half_open_inflight = False
+        if worker_id:
+            metrics.circuit_breaker_opens_total.labels(worker_id=worker_id).inc()
 
 
 # ---------------------------------------------------------------------------
@@ -114,7 +143,10 @@ class HttpProxy:
 
     def _breaker(self, worker_id: str) -> CircuitBreaker:
         if worker_id not in self._breakers:
-            self._breakers[worker_id] = CircuitBreaker()
+            self._breakers[worker_id] = CircuitBreaker(
+                failure_threshold=self._config.circuit_breaker_failure_threshold,
+                recovery_timeout_s=self._config.circuit_breaker_recovery_timeout_s,
+            )
         return self._breakers[worker_id]
 
     def _headers(self, worker: "WorkerConfig") -> dict[str, str]:
@@ -133,56 +165,65 @@ class HttpProxy:
         on_complete: Callable[[int], None] | None = None,
         extra_headers: dict[str, str] | None = None,
     ) -> dict:
-        breaker = self._breaker(worker.id)
-        if not breaker.allow_request():
-            raise WorkerCircuitOpenError(worker.id, "circuit breaker is OPEN")
+        try:
+            breaker = self._breaker(worker.id)
+            if not breaker.allow_request():
+                raise WorkerCircuitOpenError(worker.id, "circuit breaker is OPEN")
 
-        headers = self._headers(worker)
-        if request_id:
-            headers["X-Request-ID"] = request_id
-        if extra_headers:
-            headers.update(extra_headers)
+            headers = self._headers(worker)
+            if request_id:
+                headers["X-Request-ID"] = request_id
+            if extra_headers:
+                headers.update(extra_headers)
 
-        async with self._semaphore(worker.id):
-            with _tracer.start_as_current_span(
-                "worker_request",
-                attributes={
-                    "worker.id": worker.id,
-                    "worker.role": worker.role,
-                    "worker.model": worker.model,
-                    "request.path": path,
-                    "request.id": request_id,
-                    "request.streaming": False,
-                },
-            ) as span:
-                try:
-                    resp = await self.client.post(
-                        f"{worker.url.rstrip('/')}{path}",
-                        json=body,
-                        headers=headers,
-                    )
-                    resp.raise_for_status()
-                    breaker.record_success()
-                    span.set_attribute("response.status_code", resp.status_code)
-                    return resp.json()
-                except httpx.TimeoutException as exc:
-                    breaker.record_failure(worker.id)
-                    span.set_attribute("error.type", "timeout")
-                    raise WorkerTimeoutError(worker.id, str(exc)) from exc
-                except httpx.ConnectError as exc:
-                    breaker.record_failure(worker.id)
-                    span.set_attribute("error.type", "connect")
-                    raise WorkerUnavailableError(worker.id, str(exc)) from exc
-                except httpx.HTTPStatusError as exc:
-                    breaker.record_failure(worker.id)
-                    span.set_attribute("error.type", "http")
-                    span.set_attribute("response.status_code", exc.response.status_code)
-                    raise WorkerHTTPError(
-                        worker.id, exc.response.status_code, exc.response.text
-                    ) from exc
-                finally:
-                    if on_complete and token_estimate:
-                        on_complete(token_estimate)
+            async with self._semaphore(worker.id):
+                with _tracer.start_as_current_span(
+                    "worker_request",
+                    attributes={
+                        "worker.id": worker.id,
+                        "worker.role": worker.role,
+                        "worker.model": worker.model,
+                        "request.path": path,
+                        "request.id": request_id,
+                        "request.streaming": False,
+                    },
+                ) as span:
+                    try:
+                        resp = await self.client.post(
+                            f"{worker.url.rstrip('/')}{path}",
+                            json=body,
+                            headers=headers,
+                        )
+                        resp.raise_for_status()
+                        breaker.record_success()
+                        span.set_attribute("response.status_code", resp.status_code)
+                        return resp.json()
+                    except httpx.TimeoutException as exc:
+                        breaker.record_failure(worker.id)
+                        span.set_attribute("error.type", "timeout")
+                        raise WorkerTimeoutError(worker.id, str(exc)) from exc
+                    except httpx.ConnectError as exc:
+                        breaker.record_failure(worker.id)
+                        span.set_attribute("error.type", "connect")
+                        raise WorkerUnavailableError(worker.id, str(exc)) from exc
+                    except httpx.HTTPStatusError as exc:
+                        status = exc.response.status_code
+                        if is_breaker_failure(status):
+                            breaker.record_failure(worker.id)
+                        else:
+                            # Worker answered (e.g. 400/401) — it is healthy.
+                            breaker.record_success()
+                        span.set_attribute("error.type", "http")
+                        span.set_attribute("response.status_code", status)
+                        raise WorkerHTTPError(
+                            worker.id, status, exc.response.text
+                        ) from exc
+        finally:
+            # ETIF accounting must unwind on EVERY exit path — including a
+            # circuit-open reject, which is raised before the request body and
+            # previously leaked tokens_in_flight permanently.
+            if on_complete and token_estimate:
+                on_complete(token_estimate)
 
     async def forward_stream(
         self,
@@ -238,11 +279,16 @@ class HttpProxy:
                         span.set_attribute("error.type", "connect")
                         raise WorkerUnavailableError(worker.id, str(exc)) from exc
                     except httpx.HTTPStatusError as exc:
-                        breaker.record_failure(worker.id)
+                        status = exc.response.status_code
+                        if is_breaker_failure(status):
+                            breaker.record_failure(worker.id)
+                        else:
+                            # Worker answered (e.g. 400/401) — it is healthy.
+                            breaker.record_success()
                         span.set_attribute("error.type", "http")
-                        span.set_attribute("response.status_code", exc.response.status_code)
+                        span.set_attribute("response.status_code", status)
                         raise WorkerHTTPError(
-                            worker.id, exc.response.status_code, exc.response.text
+                            worker.id, status, exc.response.text
                         ) from exc
         finally:
             if on_complete and token_estimate:

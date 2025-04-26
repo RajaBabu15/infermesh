@@ -32,6 +32,15 @@ class GatewayConfig(BaseSettings):
     metrics_poll_interval_s: float = Field(default=10.0, ge=1.0)
     etif_weight: float = Field(default=0.6, ge=0.0, le=1.0)
     etif_scale: int = Field(default=4096, ge=256)
+    # Minimum trie prefix-match length (chars) for a request to count as a
+    # cache hit. 0 keeps the historical behavior (any match depth > 0 hits);
+    # raising it suppresses coincidental shallow matches so the hit metric
+    # tracks genuine prefix reuse rather than e.g. a shared system prompt.
+    kv_match_min_chars: int = Field(default=0, ge=0)
+
+    # Per-worker circuit breaker tuning (previously hardcoded).
+    circuit_breaker_failure_threshold: int = Field(default=5, ge=1)
+    circuit_breaker_recovery_timeout_s: float = Field(default=30.0, ge=1.0)
     redis_url: str = ""
     redis_channel: str = "infermesh:kv_events"
     redis_event_ttl_s: float = Field(default=3600.0, ge=10.0)

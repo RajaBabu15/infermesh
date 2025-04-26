@@ -101,7 +101,14 @@ async def _consume_streams(
     sessions: "SessionTracker | None",
     log: Any,
 ) -> None:
-    """XREADGROUP loop. Each entry is XACK'd after dispatch returns."""
+    """XREADGROUP loop with crash-recovery replay.
+
+    On every (re)connect we first drain this consumer's pending-entries list
+    (PEL) by reading id "0" — entries delivered to us before a crash but never
+    XACK'd — then switch to ">" for new entries. Reading only ">" (the previous
+    behavior) silently dropped in-flight events across a restart; draining the
+    PEL is what actually makes delivery at-least-once.
+    """
     stream_key = config.redis_channel
     group = config.redis_stream_consumer_group
     consumer = config.redis_stream_consumer_name
@@ -119,6 +126,24 @@ async def _consume_streams(
         consumer=consumer,
     )
 
+    # Phase 1: replay our own un-acked pending entries (id "0").
+    replayed = 0
+    while True:
+        resp = await client.xreadgroup(
+            group, consumer, {stream_key: "0"}, count=_STREAMS_BATCH_COUNT,
+        )
+        pending = [e for _k, entries in (resp or []) for e in entries]
+        if not pending:
+            break
+        for entry_id, fields in pending:
+            await _handle_stream_entry(
+                client, stream_key, group, entry_id, fields, config, trie, sessions, log
+            )
+            replayed += 1
+    if replayed:
+        log.info("kv_subscriber_replayed_pending", count=replayed)
+
+    # Phase 2: consume new entries (">").
     while True:
         resp = await client.xreadgroup(
             group,
@@ -131,18 +156,35 @@ async def _consume_streams(
             continue
         for _stream_key, entries in resp:
             for entry_id, fields in entries:
-                raw = fields.get("data", "")
-                try:
-                    event = json.loads(raw)
-                except (json.JSONDecodeError, TypeError):
-                    log.warning("kv_subscriber_bad_json", raw=repr(raw)[:200])
-                    metrics.redis_events_dropped_total.labels(reason="bad_json").inc()
-                    await client.xack(stream_key, group, entry_id)
-                    continue
-                try:
-                    _dispatch_event(event, config, trie, sessions, log)
-                finally:
-                    await client.xack(stream_key, group, entry_id)
+                await _handle_stream_entry(
+                    client, stream_key, group, entry_id, fields, config, trie, sessions, log
+                )
+
+
+async def _handle_stream_entry(
+    client: Any,
+    stream_key: str,
+    group: str,
+    entry_id: str,
+    fields: dict,
+    config: "GatewayConfig",
+    trie: "RadixTrie",
+    sessions: "SessionTracker | None",
+    log: Any,
+) -> None:
+    """Parse + dispatch a single stream entry, XACKing it exactly once."""
+    raw = fields.get("data", "")
+    try:
+        event = json.loads(raw)
+    except (json.JSONDecodeError, TypeError):
+        log.warning("kv_subscriber_bad_json", raw=repr(raw)[:200])
+        metrics.redis_events_dropped_total.labels(reason="bad_json").inc()
+        await client.xack(stream_key, group, entry_id)
+        return
+    try:
+        _dispatch_event(event, config, trie, sessions, log)
+    finally:
+        await client.xack(stream_key, group, entry_id)
 
 
 # ---------------------------------------------------------------------------

@@ -80,12 +80,25 @@ Workload isolation, 2502 requests through Locust at 15-21 RPS sustained:
 | Multi-turn conversation with session header | 68% |
 | Unique uuid per request | 36% |
 
+A "cache hit" here means the router found a worker via trie prefix match (any
+depth > 0 by default); it reflects routing locality, not a guaranteed warm KV
+cache upstream. On workloads that merely share a system prompt this can
+over-count — raise `INFERMESH_KV_MATCH_MIN_CHARS` to require a longer shared
+prefix before a match counts.
+
 Circuit breaker under contention, 200 concurrent Groq shared-prefix requests:
 
 |  | Median | p99 |
 |---|---|---|
 | Through gateway | 253 ms | 607 ms |
 | Direct to provider | 4564 ms | 7569 ms |
+
+This gap is **load-shedding, not a cache speedup**. Under free-tier rate limiting
+the direct client retries `429`s with exponential backoff (its latency includes
+that sleep), while the gateway's circuit breaker turns overload into instant
+`503`s. The headline 18× is the **median** ratio; the p99 ratio is 12.5×. With
+warm backends and no contention the gateway adds only single-digit-ms proxy
+overhead — it does not make an individual successful call faster.
 
 ## Configuration
 
@@ -103,6 +116,9 @@ All settings are environment variables prefixed `INFERMESH_`. Source:
 | `INFERMESH_DECODE_SESSION_TTL_S` | `600` | Sticky session TTL. |
 | `INFERMESH_MAX_CONCURRENCY_PER_WORKER` | `20` | Per-worker concurrency cap. |
 | `INFERMESH_METRICS_POLL_INTERVAL_S` | `10` | Upstream `/metrics` poll cadence. |
+| `INFERMESH_KV_MATCH_MIN_CHARS` | `0` | Min trie prefix-match length to count as a cache hit (`0` = any match > 0). |
+| `INFERMESH_CIRCUIT_BREAKER_FAILURE_THRESHOLD` | `5` | Consecutive failures before a worker circuit opens. |
+| `INFERMESH_CIRCUIT_BREAKER_RECOVERY_TIMEOUT_S` | `30` | Seconds a circuit stays OPEN before a single HALF_OPEN probe. |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | unset | Enables OpenTelemetry export. |
 
 ## Observability stack
@@ -117,6 +133,18 @@ The dashboard provisions automatically. Panels cover request rate by status,
 latency percentiles via `histogram_quantile`, cache hit rate over time,
 circuit-breaker opens, per-worker ETIF, healthy workers by role, Redis
 event throughput.
+
+## Tests
+
+```bash
+uv run --group dev pytest
+```
+
+Unit tests cover the RadixTrie (incl. a longest-prefix fuzz property), P2C
+scoring, the circuit breaker (open / single-probe HALF_OPEN / 4xx-doesn't-trip /
+ETIF-no-leak regression), the Redis event subscriber, and the OpenAI API
+surface. `bench/redis_replay_demo.py` reproduces at-least-once Streams replay
+against a local Redis.
 
 ## Layout
 
