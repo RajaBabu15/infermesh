@@ -51,6 +51,30 @@ def test_longest_prefix_fuzz_never_below_naive():
             assert wid is not None
 
 
+def test_trie_sibling_edges_no_shallow_miss():
+    """Targeted version of the fuzz property: hand-built split/sibling edges
+    where a premature early-return in the partial-match branch would surface."""
+    t = RadixTrie(ttl_s=1e9)
+    # "abc"/"abd" share "ab" then diverge -> split node with sibling edges c, d.
+    t.insert("m", "abc", "w_c")
+    t.insert("m", "abd", "w_d")
+    assert t.longest_prefix_match("m", "abc") == ("w_c", 3)
+    assert t.longest_prefix_match("m", "abd") == ("w_d", 3)
+    assert t.longest_prefix_match("m", "abcZZZ") == ("w_c", 3)   # right sibling, full depth
+    assert t.longest_prefix_match("m", "abdZZZ") == ("w_d", 3)
+    # query diverges at the split, no inserted key is a prefix -> no match
+    assert t.longest_prefix_match("m", "abz")[1] == 0
+    assert t.longest_prefix_match("m", "axy")[1] == 0
+
+    # A deeper terminal beyond a shallower one on the same path.
+    t.insert("m", "abcdef", "w_deep")
+    assert t.longest_prefix_match("m", "abcdef") == ("w_deep", 6)
+    assert t.longest_prefix_match("m", "abcdefghi") == ("w_deep", 6)
+    # "abc" is a genuine prefix of "abcdeQ" -> depth must not regress below 3
+    wid, depth = t.longest_prefix_match("m", "abcdeQ")
+    assert depth >= 3 and wid is not None
+
+
 class _StubRegistry:
     def __init__(self, workers):
         self._w = workers

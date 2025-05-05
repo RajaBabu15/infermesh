@@ -19,6 +19,21 @@ class WorkerConfig(BaseModel):
     # Ignored when disaggregation_enabled is False.
     role: Literal["prefill", "decode", "mixed"] = "mixed"
 
+    def reserve(self, tokens: int) -> None:
+        """Add `tokens` to the in-flight estimate (ETIF) read by P2C scoring.
+
+        asyncio-safety: this runs to completion without awaiting, so the
+        read-modify-write is atomic with respect to other coroutines on the
+        event loop (the same invariant SessionTracker relies on). The gateway
+        is single-threaded asyncio, so no lock is needed — but do NOT introduce
+        an `await` between the read and the write here.
+        """
+        self.tokens_in_flight += tokens
+
+    def release(self, tokens: int) -> None:
+        """Subtract `tokens` from ETIF, clamped at 0. Same no-await invariant."""
+        self.tokens_in_flight = max(0, self.tokens_in_flight - tokens)
+
 
 class GatewayConfig(BaseSettings):
     host: str = "0.0.0.0"

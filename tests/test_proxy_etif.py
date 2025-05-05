@@ -107,3 +107,33 @@ def test_server_5xx_trips_breaker():
     results = [asyncio.run(call()) for _ in range(4)]
     assert proxy._breaker("w").state == "OPEN"       # opened after 3 x 503
     assert results[-1] == "circuit_open"             # 4th request fast-fails
+
+
+class SlowClient:
+    """Yields control mid-request (await) to force coroutine interleaving."""
+    async def post(self, url, json=None, headers=None):
+        await asyncio.sleep(0)
+        return httpx.Response(200, request=httpx.Request("POST", url), json={"ok": True})
+
+    async def aclose(self):
+        pass
+
+
+def test_etif_balanced_under_concurrency():
+    """reserve() before forward + release() in forward's finally must net to
+    zero across many interleaved coroutines hitting the same worker."""
+    proxy = HttpProxy(cfg(max_concurrency_per_worker=1000))
+    proxy.client = SlowClient()
+    w = worker()
+
+    async def one(i):
+        n = i % 5 + 1
+        w.reserve(n)
+        await proxy.forward(w, "/chat/completions", {}, token_estimate=n,
+                            on_complete=lambda est: w.release(est))
+
+    async def go():
+        await asyncio.gather(*[one(i) for i in range(300)])
+
+    asyncio.run(go())
+    assert w.tokens_in_flight == 0   # every reservation was released exactly once

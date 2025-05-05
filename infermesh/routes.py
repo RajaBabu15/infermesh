@@ -141,10 +141,10 @@ async def chat_completions(request: Request) -> Response:
     )
 
     token_est = _estimate_tokens(body)
-    worker.tokens_in_flight += token_est
+    worker.reserve(token_est)
 
     def _on_complete(est: int) -> None:
-        worker.tokens_in_flight = max(0, worker.tokens_in_flight - est)
+        worker.release(est)
 
     # Session header is returned on every response (incl. errors) so a
     # conversational client keeps its sticky session across upstream failures.
@@ -284,10 +284,10 @@ async def completions(request: Request) -> Response:
     log.info("routing", request_id=req_id, model=model, worker_id=worker.id, kv_cache_hit=cache_hit)
 
     token_est = _estimate_tokens(body)
-    worker.tokens_in_flight += token_est
+    worker.reserve(token_est)
 
     def _on_complete(est: int) -> None:
-        worker.tokens_in_flight = max(0, worker.tokens_in_flight - est)
+        worker.release(est)
 
     try:
         if stream:
