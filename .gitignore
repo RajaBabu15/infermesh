@@ -33,9 +33,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # --- Benchmark output ---
-# Charts, CSVs, and Prometheus snapshots are reproducible — `uv run python -m
-# bench.real_bench` regenerates them. Force-add specific runs with `git add -f`
-# if you want them committed as reference artifacts.
 bench/results/
 
 # --- OS / Editor ---

@@ -56,14 +56,7 @@ class WorkerHTTPError(WorkerError):
 # ---------------------------------------------------------------------------
 
 def is_breaker_failure(status_code: int) -> bool:
-    """Whether an upstream HTTP status reflects worker *health* (should trip
-    the breaker) versus a client/config error that does not.
-
-    5xx and 429 (overload) indicate the worker is unhealthy or shedding load.
-    Other 4xx (400/401/403/404/422) mean the worker answered fine and the
-    request itself was rejected — those must NOT open the circuit, otherwise an
-    expired API key or a malformed request takes the whole worker offline.
-    """
+    """True for upstream overload/unavailability (5xx, 429), not client 4xx."""
     return status_code >= 500 or status_code == 429
 
 
@@ -74,8 +67,6 @@ class CircuitBreaker:
     state: Literal["CLOSED", "OPEN", "HALF_OPEN"] = "CLOSED"
     failure_count: int = 0
     opened_at: float = field(default=0.0)
-    # True while a single HALF_OPEN probe is outstanding; gates concurrent
-    # callers so only one request is admitted to test recovery.
     half_open_inflight: bool = False
 
     def allow_request(self) -> bool:
@@ -83,12 +74,10 @@ class CircuitBreaker:
             return True
         if self.state == "OPEN":
             if time.monotonic() - self.opened_at >= self.recovery_timeout_s:
-                # Transition to HALF_OPEN and admit exactly one probe.
                 self.state = "HALF_OPEN"
                 self.half_open_inflight = True
                 return True
             return False
-        # HALF_OPEN: admit a single probe at a time; reject the rest.
         if self.half_open_inflight:
             return False
         self.half_open_inflight = True
@@ -100,7 +89,6 @@ class CircuitBreaker:
         self.half_open_inflight = False
 
     def record_failure(self, worker_id: str = "") -> None:
-        # A failed probe in HALF_OPEN re-opens the circuit immediately.
         if self.state == "HALF_OPEN":
             self._open(worker_id)
             return
@@ -211,7 +199,6 @@ class HttpProxy:
                         if is_breaker_failure(status):
                             breaker.record_failure(worker.id)
                         else:
-                            # Worker answered (e.g. 400/401) — it is healthy.
                             breaker.record_success()
                         span.set_attribute("error.type", "http")
                         span.set_attribute("response.status_code", status)
@@ -219,9 +206,6 @@ class HttpProxy:
                             worker.id, status, exc.response.text
                         ) from exc
         finally:
-            # ETIF accounting must unwind on EVERY exit path — including a
-            # circuit-open reject, which is raised before the request body and
-            # previously leaked tokens_in_flight permanently.
             if on_complete and token_estimate:
                 on_complete(token_estimate)
 
@@ -283,7 +267,6 @@ class HttpProxy:
                         if is_breaker_failure(status):
                             breaker.record_failure(worker.id)
                         else:
-                            # Worker answered (e.g. 400/401) — it is healthy.
                             breaker.record_success()
                         span.set_attribute("error.type", "http")
                         span.set_attribute("response.status_code", status)

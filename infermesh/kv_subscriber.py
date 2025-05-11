@@ -101,14 +101,7 @@ async def _consume_streams(
     sessions: "SessionTracker | None",
     log: Any,
 ) -> None:
-    """XREADGROUP loop with crash-recovery replay.
-
-    On every (re)connect we first drain this consumer's pending-entries list
-    (PEL) by reading id "0" — entries delivered to us before a crash but never
-    XACK'd — then switch to ">" for new entries. Reading only ">" (the previous
-    behavior) silently dropped in-flight events across a restart; draining the
-    PEL is what actually makes delivery at-least-once.
-    """
+    """XREADGROUP loop. Drains the PEL (id \"0\") before reading new entries (\">\")."""
     stream_key = config.redis_channel
     group = config.redis_stream_consumer_group
     consumer = config.redis_stream_consumer_name
@@ -126,7 +119,6 @@ async def _consume_streams(
         consumer=consumer,
     )
 
-    # Phase 1: replay our own un-acked pending entries (id "0").
     replayed = 0
     while True:
         resp = await client.xreadgroup(
@@ -143,7 +135,6 @@ async def _consume_streams(
     if replayed:
         log.info("kv_subscriber_replayed_pending", count=replayed)
 
-    # Phase 2: consume new entries (">").
     while True:
         resp = await client.xreadgroup(
             group,

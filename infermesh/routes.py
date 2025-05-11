@@ -146,8 +146,6 @@ async def chat_completions(request: Request) -> Response:
     def _on_complete(est: int) -> None:
         worker.release(est)
 
-    # Session header is returned on every response (incl. errors) so a
-    # conversational client keeps its sticky session across upstream failures.
     sess_hdr = {config.session_header_name: response_sid} if response_sid else None
 
     try:
@@ -464,8 +462,6 @@ async def metrics_endpoint(request: Request) -> Response:
     if sessions is not None:
         metrics.active_sessions.set(sessions.session_count())
 
-    # workers_healthy counts only workers whose breaker is not OPEN, so the
-    # gauge reflects real availability rather than the static registry size.
     breaker_states = proxy.breaker_states()
     role_counts: dict[tuple[str, str], int] = {}
     for w in registry.all_workers():

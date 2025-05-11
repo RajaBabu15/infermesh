@@ -254,12 +254,7 @@ def _kv_aware_pick(
     pool: list["WorkerConfig"],
     min_match: int = 0,
 ) -> "WorkerConfig | None":
-    """Longest-prefix lookup restricted to a worker pool.
-
-    A match counts only when its depth reaches at least max(1, min_match)
-    characters, so operators can require a substantial shared prefix rather
-    than treating any 1-char overlap as a cache hit.
-    """
+    """Longest-prefix lookup restricted to a worker pool."""
     worker_id, depth = trie.longest_prefix_match(model, prefix)
     if worker_id and depth >= max(1, min_match):
         return next((w for w in pool if w.id == worker_id), None)

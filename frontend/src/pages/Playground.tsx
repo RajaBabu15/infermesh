@@ -8,12 +8,6 @@ interface Turn {
   content: string;
 }
 
-function renderContent(content: string | null, toolCalls?: any[]): React.ReactNode {
-  if (content) return content;
-  if (toolCalls?.length) return <span className="opacity-60 italic">tool call: {toolCalls[0]?.function?.name ?? "…"}</span>;
-  return <span className="opacity-40 italic">thinking…</span>;
-}
-
 export default function Playground() {
   const { data: modelsData } = useModels();
   const models = modelsData?.data ?? [];

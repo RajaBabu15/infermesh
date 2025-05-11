@@ -1,8 +1,4 @@
-"""HttpProxy ETIF accounting + breaker integration (no network).
-
-Regression coverage for the token-leak bug: a circuit-open reject on the
-non-streaming path must still unwind tokens_in_flight.
-"""
+"""HttpProxy ETIF accounting and circuit breaker integration."""
 import asyncio
 
 import httpx
@@ -42,9 +38,9 @@ def _on_complete_factory(w):
 
 def test_circuit_open_reject_does_not_leak_etif():
     proxy = HttpProxy(cfg())
-    proxy._breaker("w")._open("w")            # force OPEN (within recovery window)
+    proxy._breaker("w")._open("w")
     w = worker()
-    w.tokens_in_flight = 100                  # simulate the route handler's increment
+    w.tokens_in_flight = 100
 
     async def go():
         try:
@@ -55,7 +51,7 @@ def test_circuit_open_reject_does_not_leak_etif():
             return "circuit_open"
 
     assert asyncio.run(go()) == "circuit_open"
-    assert w.tokens_in_flight == 60           # decremented despite the open-circuit reject
+    assert w.tokens_in_flight == 60
 
 
 def test_success_decrements_etif_exactly_once():
@@ -69,7 +65,7 @@ def test_success_decrements_etif_exactly_once():
                                    on_complete=_on_complete_factory(w))
 
     assert asyncio.run(go()) == {"ok": True}
-    assert w.tokens_in_flight == 60           # one decrement, not two
+    assert w.tokens_in_flight == 60
 
 
 def test_auth_4xx_does_not_trip_breaker():
@@ -86,8 +82,8 @@ def test_auth_4xx_does_not_trip_breaker():
 
     for _ in range(5):
         assert asyncio.run(call()) == 401
-    assert proxy._breaker("w").state == "CLOSED"     # 401 never opens the circuit
-    assert proxy._breaker("w").failure_count == 0    # counted as a healthy response
+    assert proxy._breaker("w").state == "CLOSED"
+    assert proxy._breaker("w").failure_count == 0
 
 
 def test_server_5xx_trips_breaker():
@@ -105,12 +101,11 @@ def test_server_5xx_trips_breaker():
             return "circuit_open"
 
     results = [asyncio.run(call()) for _ in range(4)]
-    assert proxy._breaker("w").state == "OPEN"       # opened after 3 x 503
-    assert results[-1] == "circuit_open"             # 4th request fast-fails
+    assert proxy._breaker("w").state == "OPEN"
+    assert results[-1] == "circuit_open"
 
 
 class SlowClient:
-    """Yields control mid-request (await) to force coroutine interleaving."""
     async def post(self, url, json=None, headers=None):
         await asyncio.sleep(0)
         return httpx.Response(200, request=httpx.Request("POST", url), json={"ok": True})
@@ -120,8 +115,6 @@ class SlowClient:
 
 
 def test_etif_balanced_under_concurrency():
-    """reserve() before forward + release() in forward's finally must net to
-    zero across many interleaved coroutines hitting the same worker."""
     proxy = HttpProxy(cfg(max_concurrency_per_worker=1000))
     proxy.client = SlowClient()
     w = worker()
@@ -136,4 +129,4 @@ def test_etif_balanced_under_concurrency():
         await asyncio.gather(*[one(i) for i in range(300)])
 
     asyncio.run(go())
-    assert w.tokens_in_flight == 0   # every reservation was released exactly once
+    assert w.tokens_in_flight == 0

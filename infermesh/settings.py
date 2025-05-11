@@ -20,18 +20,9 @@ class WorkerConfig(BaseModel):
     role: Literal["prefill", "decode", "mixed"] = "mixed"
 
     def reserve(self, tokens: int) -> None:
-        """Add `tokens` to the in-flight estimate (ETIF) read by P2C scoring.
-
-        asyncio-safety: this runs to completion without awaiting, so the
-        read-modify-write is atomic with respect to other coroutines on the
-        event loop (the same invariant SessionTracker relies on). The gateway
-        is single-threaded asyncio, so no lock is needed — but do NOT introduce
-        an `await` between the read and the write here.
-        """
         self.tokens_in_flight += tokens
 
     def release(self, tokens: int) -> None:
-        """Subtract `tokens` from ETIF, clamped at 0. Same no-await invariant."""
         self.tokens_in_flight = max(0, self.tokens_in_flight - tokens)
 
 
@@ -47,13 +38,7 @@ class GatewayConfig(BaseSettings):
     metrics_poll_interval_s: float = Field(default=10.0, ge=1.0)
     etif_weight: float = Field(default=0.6, ge=0.0, le=1.0)
     etif_scale: int = Field(default=4096, ge=256)
-    # Minimum trie prefix-match length (chars) for a request to count as a
-    # cache hit. 0 keeps the historical behavior (any match depth > 0 hits);
-    # raising it suppresses coincidental shallow matches so the hit metric
-    # tracks genuine prefix reuse rather than e.g. a shared system prompt.
     kv_match_min_chars: int = Field(default=0, ge=0)
-
-    # Per-worker circuit breaker tuning (previously hardcoded).
     circuit_breaker_failure_threshold: int = Field(default=5, ge=1)
     circuit_breaker_recovery_timeout_s: float = Field(default=30.0, ge=1.0)
     redis_url: str = ""

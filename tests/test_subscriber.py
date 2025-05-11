@@ -37,7 +37,6 @@ def test_dispatch_prefill_complete_registers_session():
 
 def test_dispatch_incomplete_event_is_dropped():
     t = RadixTrie(ttl_s=1e9)
-    # missing prefix -> dropped, no crash, trie unchanged
     _dispatch_event({"event": "kv_cached", "worker_id": "w", "model": "m"},
                     cfg(), t, None, DummyLog())
     assert t.entry_count() == 0
@@ -63,7 +62,6 @@ def test_stream_entry_dispatched_and_acked():
 
 
 def test_malformed_stream_entry_is_acked_not_stuck():
-    """A bad-JSON entry must still be XACKed so it doesn't wedge the PEL."""
     fr = FakeRedis()
     asyncio.run(_handle_stream_entry(fr, "stream", "grp", "2-0", {"data": "notjson{"},
                                      cfg(), RadixTrie(ttl_s=1e9), None, DummyLog()))

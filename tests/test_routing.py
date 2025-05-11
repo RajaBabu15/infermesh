@@ -24,9 +24,6 @@ def test_trie_per_model_isolation():
 
 
 def test_longest_prefix_fuzz_never_below_naive():
-    """The trie's match depth must never be shorter than the longest inserted
-    key that is a genuine prefix of the query (catches a premature early-return
-    in the partial-match branch). Small alphabet => heavy prefix collisions."""
     random.seed(1234)
     t = RadixTrie(ttl_s=1e9)
     keys = []
@@ -52,25 +49,19 @@ def test_longest_prefix_fuzz_never_below_naive():
 
 
 def test_trie_sibling_edges_no_shallow_miss():
-    """Targeted version of the fuzz property: hand-built split/sibling edges
-    where a premature early-return in the partial-match branch would surface."""
     t = RadixTrie(ttl_s=1e9)
-    # "abc"/"abd" share "ab" then diverge -> split node with sibling edges c, d.
     t.insert("m", "abc", "w_c")
     t.insert("m", "abd", "w_d")
     assert t.longest_prefix_match("m", "abc") == ("w_c", 3)
     assert t.longest_prefix_match("m", "abd") == ("w_d", 3)
-    assert t.longest_prefix_match("m", "abcZZZ") == ("w_c", 3)   # right sibling, full depth
+    assert t.longest_prefix_match("m", "abcZZZ") == ("w_c", 3)
     assert t.longest_prefix_match("m", "abdZZZ") == ("w_d", 3)
-    # query diverges at the split, no inserted key is a prefix -> no match
     assert t.longest_prefix_match("m", "abz")[1] == 0
     assert t.longest_prefix_match("m", "axy")[1] == 0
 
-    # A deeper terminal beyond a shallower one on the same path.
     t.insert("m", "abcdef", "w_deep")
     assert t.longest_prefix_match("m", "abcdef") == ("w_deep", 6)
     assert t.longest_prefix_match("m", "abcdefghi") == ("w_deep", 6)
-    # "abc" is a genuine prefix of "abcdeQ" -> depth must not regress below 3
     wid, depth = t.longest_prefix_match("m", "abcdeQ")
     assert depth >= 3 and wid is not None
 
@@ -91,7 +82,6 @@ def test_p2c_prefers_lower_cache_utilization():
     reg = _StubRegistry([_vllm("A", 0.05), _vllm("B", 0.90)])
     p2c = PowerOfTwoChoicesRouter(reg, etif_weight=0.6, etif_scale=4096)
     picks = {p2c.select("m").id for _ in range(50)}
-    # equal ETIF, both workers compared -> deterministic lower-util winner
     assert picks == {"A"}
 
 
@@ -99,7 +89,5 @@ def test_kv_match_min_chars_threshold():
     t = RadixTrie(ttl_s=1e9)
     t.insert("m", "ab", "w1")
     pool = [WorkerConfig(id="w1", type="vllm", url="http://x", model="m")]
-    # depth-2 match counts with default (min 0 -> effectively 1)
     assert _kv_aware_pick(t, "m", "abcdef", pool, 0) is not None
-    # require >=4 chars: the 2-char match is rejected
     assert _kv_aware_pick(t, "m", "abcdef", pool, 4) is None

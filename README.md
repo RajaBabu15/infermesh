@@ -12,26 +12,47 @@ each request.
   cache utilization.
 - Optional disaggregated prefill/decode routing with session affinity via
   `X-InferMesh-Session-ID` and `prefill_complete` event handoff over Redis.
-- Per-worker circuit breaker (CLOSED, OPEN, HALF_OPEN), semaphore-bounded
-  concurrency, typed error propagation.
-- Prometheus `/metrics` with 13 metric families. OpenTelemetry spans on the
-  request path. Grafana dashboard with 20 panels in `bench/grafana/`.
-- Redis Streams (at-least-once with replay) or Pub/Sub for worker events.
-- React dashboard at `/`.
+- Per-worker circuit breaker (CLOSED, OPEN, HALF_OPEN with single-probe
+  recovery), semaphore-bounded concurrency, typed error propagation.
+- Prometheus `/metrics` with **13 metric families**. OpenTelemetry spans on the
+  request path. Grafana dashboard with **20 panels** in `bench/grafana/`.
+- Redis Streams (at-least-once with PEL replay on reconnect) or Pub/Sub for
+  worker events.
+- React admin UI at `/` with live ETIF, cache utilization, and circuit-breaker
+  state (5 s poll via `/health`).
 
 ## Quick start
 
 ```bash
-uv sync
+# Python gateway
+uv sync --group dev
 cp .env.example .env       # add GROQ_API_KEY and/or GEMINI_API_KEY
-uv run uvicorn infermesh.main:create_app --factory --port 8000
+
+# React dashboard (optional — pre-built assets ship in infermesh/static/)
+cd frontend && npm ci && npm run build && cd ..
+
+uv run uvicorn infermesh.main:create_app --factory --host 127.0.0.1 --port 8000
 ```
 
 ```bash
-curl -X POST http://localhost:8000/v1/chat/completions \
+curl -X POST http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{"model":"llama-3.1-8b-instant","messages":[{"role":"user","content":"hi"}]}'
 ```
+
+Open http://127.0.0.1:8000/ for the dashboard, http://127.0.0.1:8000/health for
+live worker state, http://127.0.0.1:8000/metrics for Prometheus.
+
+### Clean build from scratch
+
+```bash
+rm -rf .venv frontend/node_modules infermesh/static/assets infermesh/static/index.html
+uv venv && uv sync --group dev --group bench
+cd frontend && npm ci && npm run build && cd ..
+uv run pytest tests/ -q          # expect 23 passed
+```
+
+If port 8000 is busy: `lsof -ti :8000 | xargs kill -9`
 
 ## Endpoints
 
@@ -41,8 +62,8 @@ curl -X POST http://localhost:8000/v1/chat/completions \
 | `POST /v1/completions` | OpenAI-compatible completions. |
 | `POST /v1/embeddings` | Pass-through. |
 | `GET /v1/models` | Models registered in `workers.yaml`. |
-| `GET /health` | Worker loads, circuit states, trie and session counters. |
-| `GET /metrics` | Prometheus scrape. |
+| `GET /health` | Worker ETIF, circuit states, trie entries, session/Redis counters. |
+| `GET /metrics` | Prometheus scrape (13 metric families). |
 | `GET /` | React dashboard. |
 
 ## Architecture
@@ -51,18 +72,41 @@ curl -X POST http://localhost:8000/v1/chat/completions \
 |---|---|---|
 | Router | `infermesh/routing.py` | `RadixTrie` (longest-prefix match, per-model roots, TTL) + `PowerOfTwoChoicesRouter` (ETIF + cache util). |
 | Disaggregated router | `infermesh/routing.py` | `DisaggregatedRouter` splits prefill / decode / mixed pools. `SessionTracker` pins conversations to the decode worker holding their KV. |
-| Event subscriber | `infermesh/kv_subscriber.py` | Consumes `kv_cached`, `kv_evicted`, `prefill_complete` from Redis Streams or Pub/Sub. Reconnect with exponential backoff. |
-| HTTP proxy | `infermesh/proxy.py` | httpx with three-state circuit breaker, per-worker semaphore, OTEL spans, typed exceptions. |
-| Metrics | `infermesh/metrics.py` | Dedicated `CollectorRegistry`; counters, histograms, gauges. |
+| Event subscriber | `infermesh/kv_subscriber.py` | Consumes `kv_cached`, `kv_evicted`, `prefill_complete` from Redis Streams or Pub/Sub. On reconnect, drains the pending-entries list (`id "0"`) before reading new entries (`">"`). |
+| HTTP proxy | `infermesh/proxy.py` | httpx with three-state circuit breaker, per-worker semaphore, OTEL spans, typed exceptions. Only **5xx and 429** trip the breaker; **4xx (e.g. 401)** do not. |
+| Metrics | `infermesh/metrics.py` | Dedicated `CollectorRegistry`; 6 counters, 2 histograms, 5 gauges. `workers_healthy` excludes workers whose circuit is OPEN. |
 | Tracing | `infermesh/tracing.py` | `route_selection`, `worker_request`, `kv_event.*` spans. FastAPI + httpx auto-instrumented. No-op when `OTEL_EXPORTER_OTLP_ENDPOINT` is unset. |
 
 ## Measured results
 
-Real-API benchmarks against Groq and Gemini. Reproducible from
-`bench/results/`. See [`bench/README.md`](bench/README.md) for the full
-methodology and charts.
+Real-API benchmarks against Groq and Gemini. Reproducible artifacts live in
+`bench/results/`. Full harness docs: [`bench/README.md`](bench/README.md).
 
-Trie warmup, 200-request Groq shared-prefix run:
+Reference run **`bench/results/20260515-194403/`** — 200 Groq requests per cell,
+concurrency 15, shared-prefix scenario:
+
+| Mode | Median | p99 | Success rate |
+|---|---|---|---|
+| Through gateway | 253 ms | 607 ms | 30 / 200 |
+| Direct to provider | 4564 ms | 7569 ms | 44 / 200 |
+| **Median ratio** | **18.0×** | | |
+| **p99 ratio** | | **12.5×** | |
+
+This gap is **load-shedding under free-tier rate limits, not a cache speedup**.
+The direct client retries `429`s with exponential backoff; the gateway's circuit
+breaker turns overload into fast `503`s. With warm backends and no contention
+the gateway adds only single-digit-ms proxy overhead.
+
+Reference run **`bench/results/20260515-195801/locust/`** — 2502 Groq requests,
+20 users × 45 s, three workload classes:
+
+| Workload | Cache hit rate | p99 | RPS |
+|---|---|---|---|
+| Shared system prompt, varying user question | **98.9%** | 370 ms | 21.2 |
+| Multi-turn conversation (session header) | **68.0%** | 300 ms | 15.5 |
+| Unique uuid per request | **36.2%** | 290 ms | 21.0 |
+
+Trie warmup curve (gateway shared-prefix, successful requests only):
 
 ```
 request   1: 0%    (cold trie)
@@ -72,37 +116,31 @@ request  20: 95%
 request  30: 97%   (asymptote)
 ```
 
-Workload isolation, 2502 requests through Locust at 15-21 RPS sustained:
+Routing-only simulation (no upstream API, trie insert after each route):
 
-| Workload | Cache hit rate |
-|---|---|
-| Shared system prompt, varying user question | 99% |
-| Multi-turn conversation with session header | 68% |
-| Unique uuid per request | 36% |
-
-A "cache hit" here means the router found a worker via trie prefix match (any
-depth > 0 by default); it reflects routing locality, not a guaranteed warm KV
-cache upstream. On workloads that merely share a system prompt this can
-over-count — raise `INFERMESH_KV_MATCH_MIN_CHARS` to require a longer shared
-prefix before a match counts.
-
-Circuit breaker under contention, 200 concurrent Groq shared-prefix requests:
-
-|  | Median | p99 |
+| Pattern | n | Hit rate |
 |---|---|---|
-| Through gateway | 253 ms | 607 ms |
-| Direct to provider | 4564 ms | 7569 ms |
+| Shared system prompt + 15-question pool | 892 | **98.9%** |
+| Same pattern | 200 | **95.0%** |
 
-This gap is **load-shedding, not a cache speedup**. Under free-tier rate limiting
-the direct client retries `429`s with exponential backoff (its latency includes
-that sleep), while the gateway's circuit breaker turns overload into instant
-`503`s. The headline 18× is the **median** ratio; the p99 ratio is 12.5×. With
-warm backends and no contention the gateway adds only single-digit-ms proxy
-overhead — it does not make an individual successful call faster.
+A "cache hit" means the router matched a worker via trie prefix (depth ≥
+`INFERMESH_KV_MATCH_MIN_CHARS`, default 0 = any depth > 0). It reflects routing
+locality, not a guaranteed warm KV cache upstream. Raise `INFERMESH_KV_MATCH_MIN_CHARS`
+to suppress shallow coincidental matches (e.g. shared system prompt only).
+
+### Reproduce benchmarks
+
+```bash
+uv sync --group bench
+# needs valid GROQ_API_KEY / GEMINI_API_KEY in .env
+
+uv run python -m bench.real_bench --providers groq --requests-groq 200 --concurrency-groq 15
+uv run python -m bench.run_locust --users 20 --duration 45
+```
 
 ## Configuration
 
-All settings are environment variables prefixed `INFERMESH_`. Source:
+All settings use the `INFERMESH_` env prefix. Source:
 [`infermesh/settings.py`](infermesh/settings.py).
 
 | Variable | Default | Purpose |
@@ -110,48 +148,59 @@ All settings are environment variables prefixed `INFERMESH_`. Source:
 | `INFERMESH_WORKERS_CONFIG_PATH` | `workers.yaml` | Worker registry path. |
 | `INFERMESH_DISAGGREGATION_ENABLED` | `false` | Enable prefill/decode routing. |
 | `INFERMESH_PREFIX_TTL_S` | `300` | RadixTrie entry TTL. |
-| `INFERMESH_REDIS_URL` | `""` | Empty disables Redis. |
-| `INFERMESH_REDIS_TRANSPORT` | `streams` | `streams` or `pubsub`. |
+| `INFERMESH_REDIS_URL` | `""` | Empty disables Redis subscriber. |
+| `INFERMESH_REDIS_TRANSPORT` | `streams` | `streams` (at-least-once + PEL replay) or `pubsub`. |
 | `INFERMESH_ETIF_WEIGHT` | `0.6` | ETIF vs cache-util weight in P2C scoring. |
+| `INFERMESH_ETIF_SCALE` | `4096` | ETIF normalization denominator in P2C. |
+| `INFERMESH_KV_MATCH_MIN_CHARS` | `0` | Min trie match length to count as cache hit. |
 | `INFERMESH_DECODE_SESSION_TTL_S` | `600` | Sticky session TTL. |
-| `INFERMESH_MAX_CONCURRENCY_PER_WORKER` | `20` | Per-worker concurrency cap. |
-| `INFERMESH_METRICS_POLL_INTERVAL_S` | `10` | Upstream `/metrics` poll cadence. |
-| `INFERMESH_KV_MATCH_MIN_CHARS` | `0` | Min trie prefix-match length to count as a cache hit (`0` = any match > 0). |
-| `INFERMESH_CIRCUIT_BREAKER_FAILURE_THRESHOLD` | `5` | Consecutive failures before a worker circuit opens. |
-| `INFERMESH_CIRCUIT_BREAKER_RECOVERY_TIMEOUT_S` | `30` | Seconds a circuit stays OPEN before a single HALF_OPEN probe. |
+| `INFERMESH_MAX_CONCURRENCY_PER_WORKER` | `20` | Per-worker semaphore cap. |
+| `INFERMESH_METRICS_POLL_INTERVAL_S` | `10` | vLLM upstream `/metrics` poll cadence. |
+| `INFERMESH_CIRCUIT_BREAKER_FAILURE_THRESHOLD` | `5` | Consecutive 5xx/429 failures before OPEN. |
+| `INFERMESH_CIRCUIT_BREAKER_RECOVERY_TIMEOUT_S` | `30` | Seconds OPEN before one HALF_OPEN probe. |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | unset | Enables OpenTelemetry export. |
+
+Default `workers.yaml` registers **4 workers** (2 Groq, 2 Gemini), all
+`type: openai` / `role: mixed`.
 
 ## Observability stack
 
 ```bash
-cd bench/grafana
-docker compose up -d
+# Terminal 1
+uv run uvicorn infermesh.main:create_app --factory --port 8000
+
+# Terminal 2
+cd bench/grafana && docker compose up -d
 # Grafana: http://localhost:3000 (anonymous Viewer)
 ```
 
-The dashboard provisions automatically. Panels cover request rate by status,
-latency percentiles via `histogram_quantile`, cache hit rate over time,
-circuit-breaker opens, per-worker ETIF, healthy workers by role, Redis
-event throughput.
+Dashboard **InferMesh Gateway** provisions automatically — **20 panels** (4 row
+headers + 16 visualizations) across Traffic, Latency, KV cache routing, and
+Workers. PromQL covers request rate by status, `histogram_quantile` latency,
+cache hit rate, circuit-breaker opens, per-worker ETIF, healthy workers by role,
+Redis event throughput.
 
 ## Tests
 
 ```bash
-uv run --group dev pytest
+uv sync --group dev
+uv run pytest tests/ -q
 ```
 
-Unit tests cover the RadixTrie (incl. a longest-prefix fuzz property), P2C
-scoring, the circuit breaker (open / single-probe HALF_OPEN / 4xx-doesn't-trip /
-ETIF-no-leak regression), the Redis event subscriber, and the OpenAI API
-surface. `bench/redis_replay_demo.py` reproduces at-least-once Streams replay
-against a local Redis.
+Redis Streams replay demo (needs local Redis):
+
+```bash
+redis-server --port 6379 --save "" &
+uv run python bench/redis_replay_demo.py
+```
 
 ## Layout
 
 ```
-infermesh/     Gateway code.
-frontend/     React + Vite dashboard. Built output lives in infermesh/static/.
-bench/        Benchmarks (asyncio + Locust) and Grafana stack.
-workers.yaml  Worker registry (Groq + Gemini by default).
-pyproject.toml uv project, optional `bench` dependency group.
+infermesh/     Gateway code (Python 3.11+).
+frontend/      React + Vite dashboard → built into infermesh/static/.
+tests/         pytest unit tests (23 cases).
+bench/         Benchmarks (asyncio + Locust), Grafana stack, redis_replay_demo.
+workers.yaml   Worker registry (Groq + Gemini by default).
+pyproject.toml uv project; optional `dev` and `bench` dependency groups.
 ```
