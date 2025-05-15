@@ -121,7 +121,13 @@ Routing-only simulation (no upstream API, trie insert after each route):
 | Pattern | n | Hit rate |
 |---|---|---|
 | Shared system prompt + 15-question pool | 892 | **98.9%** |
-| Same pattern | 200 | **95.0%** |
+| Shared system prompt + 15-question pool | 200 | **95.5%** |
+| Unique uuid-prefixed system prompt | 200 | **33.0%** |
+| Fully unique user content (shared system prompt only) | 200 | **31.5%** |
+
+The bottom two rows differ by only ~1.5pp despite carrying no reusable content
+beyond the system prompt — evidence that shallow matches inflate the rate, which
+is what `INFERMESH_KV_MATCH_MIN_CHARS` exists to suppress.
 
 A "cache hit" means the router matched a worker via trie prefix (depth ≥
 `INFERMESH_KV_MATCH_MIN_CHARS`, default 0 = any depth > 0). It reflects routing
