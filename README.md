@@ -82,6 +82,8 @@ If port 8000 is busy: `lsof -ti :8000 | xargs kill -9`
 Real-API benchmarks against Groq and Gemini. Reproducible artifacts live in
 `bench/results/`. Full harness docs: [`bench/README.md`](bench/README.md).
 
+> The GitHub repository was created on 2026-05-19. The first pushed commit, `0d8ed4b`, is an "Initial Commit" authored 2026-05-15, the night of the Locust run in `bench/results/20260515-195801`, and committed on 2026-06-23. That root was replaced the same hour by history whose author dates say spring 2025 and whose seconds are `:00`. Those trees contain a Locust epoch of 2026-05-15 and npm packages published in May 2026, including `rollup@4.60.4` and `@tanstack/react-query@5.100.10`. The 2025 dates are not when those commits were written. The benchmark JSON in the tree is the record of the run. I am not dating this project 2025.
+
 Reference run **`bench/results/20260515-194403/`** — 200 Groq requests per cell,
 concurrency 15, shared-prefix scenario:
 
