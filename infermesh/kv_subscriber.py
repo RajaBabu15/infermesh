@@ -36,6 +36,9 @@ if TYPE_CHECKING:
 _BACKOFF_BASE_S: float = 1.0
 _BACKOFF_MAX_S: float = 60.0
 _STREAMS_BLOCK_MS: int = 5000
+# Must exceed the XREADGROUP block time, or every idle read raises
+# TimeoutError (redis-py 8 defaults socket_timeout to 5 s; redis-py #2807).
+_SOCKET_TIMEOUT_S: float = _STREAMS_BLOCK_MS / 1000 + 5
 _STREAMS_BATCH_COUNT: int = 64
 
 _tracer = get_tracer(__name__)
@@ -59,13 +62,14 @@ async def kv_subscriber_loop(
                 config.redis_url,
                 decode_responses=True,
                 socket_connect_timeout=5,
-                socket_timeout=5,
+                socket_timeout=_SOCKET_TIMEOUT_S,
             )
+            await client.ping()
+            delay = _BACKOFF_BASE_S
             if config.redis_transport == "streams":
                 await _consume_streams(client, config, trie, sessions, log)
             else:
                 await _consume_pubsub(client, config, trie, sessions, log)
-            delay = _BACKOFF_BASE_S
 
         except asyncio.CancelledError:
             log.info("kv_subscriber_cancelled")
@@ -271,7 +275,7 @@ def _dispatch_event(
             "kv_event.kv_evicted",
             attributes={"worker.id": worker_id, "model": model},
         ):
-            found = trie.remove(model, prefix)
+            found = trie.remove(model, prefix, worker_id)
             log.debug("kv_evicted", worker_id=worker_id, model=model, found=found)
     else:
         log.warning("kv_subscriber_unknown_event", event_type=event_type)

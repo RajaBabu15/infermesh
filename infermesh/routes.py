@@ -1,18 +1,26 @@
 """FastAPI route handlers for the InferMesh gateway."""
 from __future__ import annotations
 
+import asyncio
+import math
+import secrets
 import time
 import uuid
+from collections.abc import AsyncIterator, Callable
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 import structlog
 from fastapi import APIRouter, Request, Response
 from fastapi.responses import JSONResponse, StreamingResponse
+from starlette.background import BackgroundTask
 
 from infermesh import metrics
 from infermesh.models import ErrorDetail, ErrorResponse, ModelInfo, ModelList
 from infermesh.proxy import (
+    UpstreamStream,
     WorkerCircuitOpenError,
+    WorkerError,
     WorkerHTTPError,
     WorkerTimeoutError,
     WorkerUnavailableError,
@@ -24,7 +32,7 @@ if TYPE_CHECKING:
     from infermesh.proxy import HttpProxy
     from infermesh.registry import WorkerRegistry
     from infermesh.routing import DisaggregatedRouter, KVAwareRouter, SessionTracker
-    from infermesh.settings import GatewayConfig
+    from infermesh.settings import GatewayConfig, WorkerConfig
 
 log = structlog.get_logger()
 _tracer = get_tracer(__name__)
@@ -37,11 +45,15 @@ def _request_id(request: Request) -> str:
 
 
 def _error_response(
-    status: int, type_: str, message: str, headers: dict[str, str] | None = None
+    status: int,
+    type_: str,
+    message: str,
+    headers: dict[str, str] | None = None,
+    code: str | None = None,
 ) -> JSONResponse:
     return JSONResponse(
         status_code=status,
-        content=ErrorResponse(error=ErrorDetail(message=message, type=type_)).model_dump(),
+        content=ErrorResponse(error=ErrorDetail(message=message, type=type_, code=code)).model_dump(),
         headers=headers,
     )
 
@@ -50,8 +62,8 @@ def _check_auth(request: Request) -> Response | None:
     expected = getattr(request.app.state.config, "api_key", "")
     if not expected:
         return None
-    auth = request.headers.get("Authorization")
-    if not auth or not auth.startswith("Bearer ") or auth[7:] != expected:
+    auth = request.headers.get("Authorization", "")
+    if not (auth.startswith("Bearer ") and secrets.compare_digest(auth[7:], expected)):
         return JSONResponse(
             status_code=401,
             content=ErrorResponse(error=ErrorDetail(message="Invalid API key", type="invalid_request_error")).model_dump(),
@@ -60,308 +72,277 @@ def _check_auth(request: Request) -> Response | None:
     return None
 
 
-@router.post("/v1/chat/completions")
-async def chat_completions(request: Request) -> Response:
-    auth_err = _check_auth(request)
-    if auth_err:
-        return auth_err
-    req_id = _request_id(request)
+async def _json_body(request: Request) -> dict | Response:
     try:
         body = await request.json()
     except Exception:
         return _error_response(400, "invalid_request", "request body is not valid JSON")
-    model = body.get("model", "")
-    messages = body.get("messages", [])
-    stream = body.get("stream", False)
+    if not isinstance(body, dict):
+        return _error_response(400, "invalid_request", "request body must be a JSON object")
+    return body
 
+
+def _worker_error_response(
+    exc: WorkerError, headers: dict[str, str] | None
+) -> tuple[Response, str]:
+    """Map a typed proxy error to (client response, metrics status label)."""
+    if isinstance(exc, WorkerCircuitOpenError):
+        return _error_response(503, "circuit_open", f"worker {exc.worker_id} circuit is open", headers), "circuit_open"
+    if isinstance(exc, WorkerTimeoutError):
+        return _error_response(504, "timeout", f"worker {exc.worker_id} timed out", headers), "timeout"
+    if isinstance(exc, WorkerUnavailableError):
+        return _error_response(503, "worker_unavailable", f"worker {exc.worker_id} unreachable", headers), "worker_unavailable"
+    assert isinstance(exc, WorkerHTTPError)
+    if 400 <= exc.status_code < 500:
+        # Pass 4xx through unchanged so the client sees the upstream error,
+        # including Retry-After / x-ratelimit-* on 429.
+        return Response(
+            content=exc.body,
+            status_code=exc.status_code,
+            media_type="application/json",
+            headers={**exc.headers, **(headers or {})},
+        ), "upstream_4xx"
+    return _error_response(502, "upstream_error", f"worker {exc.worker_id} returned {exc.status_code}", headers), "upstream_5xx"
+
+
+def _retryable(exc: WorkerError) -> bool:
+    """Safe to resend to another worker of the same model: nothing reached the
+    client yet and the failure is the worker's. Timeouts are not retried; a slow
+    generation would just run twice."""
+    if isinstance(exc, (WorkerCircuitOpenError, WorkerUnavailableError)):
+        return True
+    return isinstance(exc, WorkerHTTPError) and (exc.status_code == 429 or exc.status_code >= 500)
+
+
+def _record_usage(model: str, worker_id: str, result: dict) -> None:
+    """Provider-reported prompt-cache hits: the ground truth for cache reuse."""
+    usage = result.get("usage")
+    if not isinstance(usage, dict):
+        return
+    prompt = usage.get("prompt_tokens") or 0
+    cached = (usage.get("prompt_tokens_details") or {}).get("cached_tokens") or 0
+    metrics.upstream_prompt_tokens_total.labels(model=model, worker_id=worker_id).inc(prompt)
+    metrics.upstream_cached_tokens_total.labels(model=model, worker_id=worker_id).inc(cached)
+
+
+@dataclass
+class _Route:
+    worker: "WorkerConfig"
+    cache_hit: bool
+    label: str
+    hit_source: str | None
+    upstream_headers: dict[str, str] = field(default_factory=dict)
+
+
+def _select(
+    request: Request,
+    model: str,
+    messages: list[dict] | None,
+    prefix: str,
+    session_in: str | None,
+    session_out: str | None,
+    exclude: set[str],
+) -> _Route:
+    config: GatewayConfig = request.app.state.config
+    if config.disaggregation_enabled and messages is not None:
+        disagg_router: DisaggregatedRouter = request.app.state.disagg_router
+        upstream = {config.session_header_name: session_out or ""}
+        if session_in:
+            # Sticky-route to the decode worker holding this KV.
+            worker, hit = disagg_router.select_decode(model, session_in, messages, exclude)
+            return _Route(worker, hit, "disaggregated_decode", "session_sticky" if hit else None, upstream)
+        worker, hit = disagg_router.select_prefill(model, messages, exclude)
+        return _Route(worker, hit, "disaggregated_prefill", "trie" if hit else None, upstream)
+    kv_router: KVAwareRouter = request.app.state.router
+    worker, hit = kv_router.select(model, messages or [], prefix=prefix, exclude=exclude)
+    return _Route(worker, hit, "kv_aware", "trie" if hit else None)
+
+
+async def _relay(upstream: UpstreamStream, on_finish: Callable[[str], None]) -> AsyncIterator[bytes]:
+    status = "success"
+    try:
+        async for chunk in upstream.body():
+            yield chunk
+    except WorkerError as exc:
+        # Headers are already sent; the best signal left is a truncated stream.
+        status = "stream_error"
+        log.warning("stream_error", worker_id=exc.worker_id, error=str(exc))
+    except (asyncio.CancelledError, GeneratorExit):
+        status = "client_disconnect"
+        raise
+    finally:
+        await upstream.aclose()
+        on_finish(status)
+
+
+async def _proxy(
+    request: Request,
+    *,
+    endpoint: str,
+    path: str,
+    body: dict,
+    model: str,
+    prefix: str,
+    messages: list[dict] | None = None,
+    use_trie: bool = True,
+) -> Response:
+    """Route, forward, and fail over to another worker of the same model."""
     config: GatewayConfig = request.app.state.config
     proxy: HttpProxy = request.app.state.proxy
     trie: RadixTrie = request.app.state.trie
+    registry: WorkerRegistry = request.app.state.registry
+    req_id = _request_id(request)
+    stream = bool(body.get("stream"))
 
-    response_sid: str | None = None
-    upstream_headers: dict[str, str] = {}
+    if not registry.get_workers(model):
+        metrics.requests_total.labels(endpoint=endpoint, model="", status="model_not_found").inc()
+        return _error_response(
+            404, "invalid_request_error",
+            f"model '{model}' is not served by this gateway", code="model_not_found",
+        )
 
-    routing_start = time.monotonic()
-    request_start = routing_start
-    try:
-        with _tracer.start_as_current_span("route_selection") as route_span:
-            if config.disaggregation_enabled:
-                disagg_router: DisaggregatedRouter = request.app.state.disagg_router
-                incoming_sid = request.headers.get(config.session_header_name)
-
-                if incoming_sid:
-                    # Sticky-route to the decode worker holding this KV.
-                    worker, cache_hit = disagg_router.select_decode(
-                        model, incoming_sid, messages
-                    )
-                    response_sid = incoming_sid
-                    router_label = "disaggregated_decode"
-                    hit_source = "session_sticky" if cache_hit else None
-                else:
-                    # New session: route to prefill and mint a session_id.
-                    worker, cache_hit = disagg_router.select_prefill(model, messages)
-                    response_sid = f"sess-{uuid.uuid4().hex[:16]}"
-                    router_label = "disaggregated_prefill"
-                    hit_source = "trie" if cache_hit else None
-
-                upstream_headers[config.session_header_name] = response_sid
-                route_span.set_attribute("disagg.enabled", True)
-                route_span.set_attribute("session.id", response_sid)
-            else:
-                kv_router: KVAwareRouter = request.app.state.router
-                worker, cache_hit = kv_router.select(model, messages)
-                router_label = "kv_aware"
-                hit_source = "trie" if cache_hit else None
-                route_span.set_attribute("disagg.enabled", False)
-
-            route_span.set_attribute("worker.id", worker.id)
-            route_span.set_attribute("worker.role", worker.role)
-            route_span.set_attribute("cache.hit", cache_hit)
-    except NoWorkersAvailable as exc:
-        metrics.requests_total.labels(
-            endpoint="/v1/chat/completions", model=model, status="no_workers"
-        ).inc()
-        return _error_response(503, "no_workers", str(exc))
-
-    metrics.routing_decision_seconds.labels(router=router_label).observe(
-        time.monotonic() - routing_start
-    )
-    if cache_hit:
-        metrics.kv_cache_hits_total.labels(model=model, source=hit_source or "trie").inc()
-    else:
-        metrics.kv_cache_misses_total.labels(model=model).inc()
-
-    log.info(
-        "routing",
-        request_id=req_id,
-        model=model,
-        worker_id=worker.id,
-        kv_cache_hit=cache_hit,
-        session_id=response_sid,
-    )
+    session_in = session_out = None
+    if config.disaggregation_enabled and messages is not None:
+        session_in = request.headers.get(config.session_header_name)
+        session_out = session_in or f"sess-{uuid.uuid4().hex[:16]}"
+    resp_headers = {config.session_header_name: session_out} if session_out else None
 
     token_est = _estimate_tokens(body)
-    worker.reserve(token_est)
+    request_start = time.monotonic()
+    tried: set[str] = set()
+    last_exc: WorkerError | None = None
 
-    def _on_complete(est: int) -> None:
-        worker.release(est)
+    for _ in range(config.max_attempts):
+        routing_start = time.monotonic()
+        try:
+            with _tracer.start_as_current_span("route_selection") as span:
+                route = _select(request, model, messages, prefix, session_in, session_out, tried)
+                span.set_attribute("worker.id", route.worker.id)
+                span.set_attribute("worker.role", route.worker.role)
+                span.set_attribute("cache.hit", route.cache_hit)
+                span.set_attribute("disagg.enabled", config.disaggregation_enabled)
+        except NoWorkersAvailable as exc:
+            if last_exc is not None:
+                break
+            metrics.requests_total.labels(endpoint=endpoint, model=model, status="no_workers").inc()
+            wait = min(proxy.retry_in_s(w) for w in registry.get_workers(model))
+            headers = {**(resp_headers or {}), "Retry-After": str(max(1, math.ceil(wait)))}
+            return _error_response(503, "no_workers", str(exc), headers=headers)
 
-    sess_hdr = {config.session_header_name: response_sid} if response_sid else None
+        worker = route.worker
+        metrics.routing_decision_seconds.labels(router=route.label).observe(time.monotonic() - routing_start)
+        if use_trie:
+            if route.cache_hit:
+                metrics.kv_cache_hits_total.labels(model=model, source=route.hit_source or "trie").inc()
+            else:
+                metrics.kv_cache_misses_total.labels(model=model).inc()
+        log.info("routing", request_id=req_id, model=model, worker_id=worker.id,
+                 kv_cache_hit=route.cache_hit, session_id=session_out, attempt=len(tried) + 1)
 
-    try:
-        if stream:
-            prefix = RadixTrie.extract_prefix(messages)
+        worker.reserve(token_est)
+        try:
+            if stream:
+                upstream = await proxy.open_stream(
+                    worker, path, body, req_id,
+                    token_estimate=token_est, on_complete=worker.release,
+                    extra_headers=route.upstream_headers or None,
+                )
 
-            async def _stream():
-                stream_status = "success"
-                try:
-                    async for chunk in proxy.forward_stream(
-                        worker, "/chat/completions", body, req_id,
-                        token_estimate=token_est,
-                        on_complete=_on_complete,
-                        extra_headers=upstream_headers or None,
-                    ):
-                        yield chunk
-                    trie.insert(model, prefix, worker.id)
-                    request.app.state.cache_hits_total += int(cache_hit)
-                    log.info(
-                        "request_complete",
-                        request_id=req_id,
-                        model=model,
-                        worker_id=worker.id,
-                        kv_cache_hit=cache_hit,
-                        stream=True,
-                    )
-                except Exception as exc:
-                    stream_status = "stream_error"
-                    log.warning(
-                        "stream_error",
-                        request_id=req_id,
-                        worker_id=worker.id,
-                        error=str(exc),
-                    )
-                finally:
+                def on_finish(status: str, worker: WorkerConfig = worker,
+                              cache_hit: bool = route.cache_hit) -> None:
+                    if use_trie and prefix and status in ("success", "client_disconnect"):
+                        trie.insert(model, prefix, worker.id)
                     metrics.request_duration_seconds.labels(
-                        endpoint="/v1/chat/completions",
-                        model=model,
-                        worker_id=worker.id,
+                        endpoint=endpoint, model=model, worker_id=worker.id,
                     ).observe(time.monotonic() - request_start)
-                    metrics.requests_total.labels(
-                        endpoint="/v1/chat/completions",
-                        model=model,
-                        status=stream_status,
-                    ).inc()
+                    metrics.requests_total.labels(endpoint=endpoint, model=model, status=status).inc()
+                    log.info("request_complete", request_id=req_id, model=model,
+                             worker_id=worker.id, kv_cache_hit=cache_hit,
+                             stream=True, status=status)
 
-            stream_headers = (
-                {config.session_header_name: response_sid} if response_sid else None
-            )
-            return StreamingResponse(
-                _stream(),
-                media_type="text/event-stream",
-                headers=stream_headers,
-            )
+                return StreamingResponse(
+                    _relay(upstream, on_finish),
+                    status_code=upstream.status_code,
+                    media_type=upstream.media_type,
+                    headers=resp_headers,
+                    background=BackgroundTask(upstream.aclose),
+                )
 
-        result = await proxy.forward(
-            worker, "/chat/completions", body, req_id,
-            token_estimate=token_est,
-            on_complete=_on_complete,
-            extra_headers=upstream_headers or None,
-        )
-        prefix = RadixTrie.extract_prefix(messages)
-        trie.insert(model, prefix, worker.id)
-        request.app.state.cache_hits_total += int(cache_hit)
-        log.info(
-            "request_complete",
-            request_id=req_id,
-            model=model,
-            worker_id=worker.id,
-            kv_cache_hit=cache_hit,
-            stream=False,
-            tokens_in_flight=worker.tokens_in_flight,
-        )
+            result = await proxy.forward(
+                worker, path, body, req_id,
+                token_estimate=token_est, on_complete=worker.release,
+                extra_headers=route.upstream_headers or None,
+            )
+        except WorkerError as exc:
+            tried.add(worker.id)
+            last_exc = exc
+            log.warning("worker_failed", request_id=req_id, worker_id=worker.id,
+                        error=str(exc), retryable=_retryable(exc))
+            if not _retryable(exc):
+                break
+            continue
+
+        if use_trie and prefix:
+            trie.insert(model, prefix, worker.id)
+        _record_usage(model, worker.id, result)
+        log.info("request_complete", request_id=req_id, model=model, worker_id=worker.id,
+                 kv_cache_hit=route.cache_hit, stream=False)
         metrics.request_duration_seconds.labels(
-            endpoint="/v1/chat/completions", model=model, worker_id=worker.id,
+            endpoint=endpoint, model=model, worker_id=worker.id,
         ).observe(time.monotonic() - request_start)
-        metrics.requests_total.labels(
-            endpoint="/v1/chat/completions", model=model, status="success",
-        ).inc()
-        response_headers = (
-            {config.session_header_name: response_sid} if response_sid else None
-        )
-        return JSONResponse(content=result, headers=response_headers)
+        metrics.requests_total.labels(endpoint=endpoint, model=model, status="success").inc()
+        return JSONResponse(content=result, headers=resp_headers)
 
-    except WorkerCircuitOpenError as exc:
-        metrics.requests_total.labels(
-            endpoint="/v1/chat/completions", model=model, status="circuit_open",
-        ).inc()
-        return _error_response(503, "circuit_open", f"worker {exc.worker_id} circuit is open", headers=sess_hdr)
-    except WorkerTimeoutError as exc:
-        metrics.requests_total.labels(
-            endpoint="/v1/chat/completions", model=model, status="timeout",
-        ).inc()
-        return _error_response(504, "timeout", f"worker {exc.worker_id} timed out", headers=sess_hdr)
-    except WorkerUnavailableError as exc:
-        metrics.requests_total.labels(
-            endpoint="/v1/chat/completions", model=model, status="worker_unavailable",
-        ).inc()
-        return _error_response(503, "worker_unavailable", f"worker {exc.worker_id} unreachable", headers=sess_hdr)
-    except WorkerHTTPError as exc:
-        status = "upstream_4xx" if 400 <= exc.status_code < 500 else "upstream_5xx"
-        metrics.requests_total.labels(
-            endpoint="/v1/chat/completions", model=model, status=status,
-        ).inc()
-        # Pass 4xx through unchanged so the client sees the upstream error.
-        if 400 <= exc.status_code < 500:
-            return Response(content=exc.body, status_code=exc.status_code, media_type="application/json", headers=sess_hdr)
-        return _error_response(502, "upstream_error", f"worker {exc.worker_id} returned {exc.status_code}", headers=sess_hdr)
+    assert last_exc is not None
+    response, status = _worker_error_response(last_exc, resp_headers)
+    metrics.requests_total.labels(endpoint=endpoint, model=model, status=status).inc()
+    return response
+
+
+@router.post("/v1/chat/completions")
+async def chat_completions(request: Request) -> Response:
+    if (auth_err := _check_auth(request)) is not None:
+        return auth_err
+    body = await _json_body(request)
+    if isinstance(body, Response):
+        return body
+    messages = body.get("messages", [])
+    return await _proxy(
+        request, endpoint="/v1/chat/completions", path="/chat/completions", body=body,
+        model=body.get("model", ""), prefix=RadixTrie.extract_prefix(messages), messages=messages,
+    )
 
 
 @router.post("/v1/completions")
 async def completions(request: Request) -> Response:
-    auth_err = _check_auth(request)
-    if auth_err:
+    if (auth_err := _check_auth(request)) is not None:
         return auth_err
-    req_id = _request_id(request)
-    try:
-        body = await request.json()
-    except Exception:
-        return _error_response(400, "invalid_request", "request body is not valid JSON")
-    model = body.get("model", "")
-    stream = body.get("stream", False)
-    prompt = body.get("prompt", "") if isinstance(body.get("prompt"), str) else ""
-
-    kv_router: KVAwareRouter = request.app.state.router
-    proxy: HttpProxy = request.app.state.proxy
-    trie: RadixTrie = request.app.state.trie
-
-    try:
-        worker, cache_hit = kv_router.select(model, [], prefix=prompt)
-    except NoWorkersAvailable as exc:
-        return _error_response(503, "no_workers", str(exc))
-
-    log.info("routing", request_id=req_id, model=model, worker_id=worker.id, kv_cache_hit=cache_hit)
-
-    token_est = _estimate_tokens(body)
-    worker.reserve(token_est)
-
-    def _on_complete(est: int) -> None:
-        worker.release(est)
-
-    try:
-        if stream:
-            async def _stream():
-                try:
-                    async for chunk in proxy.forward_stream(
-                        worker, "/completions", body, req_id,
-                        token_estimate=token_est,
-                        on_complete=_on_complete,
-                    ):
-                        yield chunk
-                    if prompt:
-                        trie.insert(model, prompt, worker.id)
-                except Exception as exc:
-                    log.warning("stream_error", request_id=req_id, worker_id=worker.id, error=str(exc))
-            return StreamingResponse(_stream(), media_type="text/event-stream")
-
-        result = await proxy.forward(
-            worker, "/completions", body, req_id,
-            token_estimate=token_est,
-            on_complete=_on_complete,
-        )
-        if prompt:
-            trie.insert(model, prompt, worker.id)
-        return JSONResponse(content=result)
-    except WorkerCircuitOpenError as exc:
-        return _error_response(503, "circuit_open", f"worker {exc.worker_id} circuit is open")
-    except WorkerTimeoutError as exc:
-        return _error_response(504, "timeout", f"worker {exc.worker_id} timed out")
-    except WorkerUnavailableError as exc:
-        return _error_response(503, "worker_unavailable", f"worker {exc.worker_id} unreachable")
-    except WorkerHTTPError as exc:
-        if 400 <= exc.status_code < 500:
-            return Response(content=exc.body, status_code=exc.status_code, media_type="application/json")
-        return _error_response(502, "upstream_error", f"worker {exc.worker_id} returned {exc.status_code}")
+    body = await _json_body(request)
+    if isinstance(body, Response):
+        return body
+    prompt = body.get("prompt") if isinstance(body.get("prompt"), str) else ""
+    return await _proxy(
+        request, endpoint="/v1/completions", path="/completions", body=body,
+        model=body.get("model", ""), prefix=prompt,
+    )
 
 
 @router.post("/v1/embeddings")
 async def embeddings(request: Request) -> Response:
-    auth_err = _check_auth(request)
-    if auth_err:
+    if (auth_err := _check_auth(request)) is not None:
         return auth_err
-    req_id = _request_id(request)
-    try:
-        body = await request.json()
-    except Exception:
-        return _error_response(400, "invalid_request", "request body is not valid JSON")
-    model = body.get("model", "")
-
-    kv_router: KVAwareRouter = request.app.state.router
-    proxy: HttpProxy = request.app.state.proxy
-
-    try:
-        worker, _ = kv_router.select(model, [])
-    except NoWorkersAvailable as exc:
-        return _error_response(503, "no_workers", str(exc))
-
-    try:
-        result = await proxy.forward(worker, "/embeddings", body, req_id)
-        return JSONResponse(content=result)
-    except WorkerCircuitOpenError as exc:
-        return _error_response(503, "circuit_open", f"worker {exc.worker_id} circuit is open")
-    except WorkerTimeoutError as exc:
-        return _error_response(504, "timeout", f"worker {exc.worker_id} timed out")
-    except WorkerUnavailableError as exc:
-        return _error_response(503, "worker_unavailable", f"worker {exc.worker_id} unreachable")
-    except WorkerHTTPError as exc:
-        if 400 <= exc.status_code < 500:
-            return Response(content=exc.body, status_code=exc.status_code, media_type="application/json")
-        return _error_response(502, "upstream_error", f"worker {exc.worker_id} returned {exc.status_code}")
+    body = await _json_body(request)
+    if isinstance(body, Response):
+        return body
+    return await _proxy(
+        request, endpoint="/v1/embeddings", path="/embeddings", body=body,
+        model=body.get("model", ""), prefix="", use_trie=False,
+    )
 
 
 @router.get("/v1/models")
 async def list_models(request: Request) -> Response:
-    auth_err = _check_auth(request)
-    if auth_err:
+    if (auth_err := _check_auth(request)) is not None:
         return auth_err
     registry: WorkerRegistry = request.app.state.registry
     seen: set[str] = set()
@@ -379,7 +360,6 @@ async def health(request: Request) -> JSONResponse:
     proxy: HttpProxy = request.app.state.proxy
     trie: RadixTrie = request.app.state.trie
     workers = registry.all_workers()
-    hits: int = getattr(request.app.state, "cache_hits_total", 0)
     config: GatewayConfig = request.app.state.config
     breaker_states = proxy.breaker_states()
 
@@ -390,6 +370,7 @@ async def health(request: Request) -> JSONResponse:
             "type": w.type,
             "role": w.role,
             "tokens_in_flight": w.tokens_in_flight,
+            "requests_in_flight": w.requests_in_flight,
             "cache_utilization": w.cache_utilization,
             "circuit_state": breaker_states.get(w.id, "CLOSED"),
         }
@@ -400,7 +381,7 @@ async def health(request: Request) -> JSONResponse:
         "workers": len(workers),
         "worker_loads": worker_loads,
         "trie_entries": trie.entry_count(),
-        "cache_hits_total": hits,
+        "cache_hits_total": int(_sum_counter(metrics.kv_cache_hits_total)),
         "redis_enabled": bool(config.redis_url),
         "redis_transport": config.redis_transport if config.redis_url else None,
         "disaggregation_enabled": config.disaggregation_enabled,

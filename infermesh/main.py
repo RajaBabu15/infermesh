@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -86,6 +87,9 @@ def create_app() -> FastAPI:
     # its own model fields).
     load_dotenv()
     config = GatewayConfig()
+    # structlog hands records to stdlib logging; without a root handler at
+    # INFO, every log.info() call is dropped.
+    logging.basicConfig(level=config.log_level.upper(), format="%(message)s")
 
     otel_enabled = init_tracing(config.otel_service_name)
     if otel_enabled:
@@ -93,16 +97,18 @@ def create_app() -> FastAPI:
 
     registry = WorkerRegistry(config.workers_config_path)
     trie = RadixTrie(ttl_s=config.prefix_ttl_s)
-    # Always instantiate KVAwareRouter for /v1/completions, /v1/embeddings,
-    # and the non-disagg chat path.
-    kv_router = KVAwareRouter(registry, trie, config)
     proxy = HttpProxy(config)
+    # Always instantiate KVAwareRouter for /v1/completions, /v1/embeddings,
+    # and the non-disagg chat path. Workers with an open circuit are skipped.
+    kv_router = KVAwareRouter(registry, trie, config, is_available=proxy.is_available)
 
     sessions: SessionTracker | None = None
     disagg_router: DisaggregatedRouter | None = None
     if config.disaggregation_enabled:
         sessions = SessionTracker(ttl_s=config.decode_session_ttl_s)
-        disagg_router = DisaggregatedRouter(registry, trie, sessions, config)
+        disagg_router = DisaggregatedRouter(
+            registry, trie, sessions, config, is_available=proxy.is_available
+        )
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -157,7 +163,6 @@ def create_app() -> FastAPI:
     app.state.trie = trie
     app.state.router = kv_router
     app.state.proxy = proxy
-    app.state.cache_hits_total = 0
     app.state.sessions = sessions
     app.state.disagg_router = disagg_router
     app.state.otel_enabled = otel_enabled

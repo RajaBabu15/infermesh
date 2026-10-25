@@ -7,14 +7,21 @@ each request.
 
 ## Features
 
-- Character-level `RadixTrie` with TTL eviction for longest-prefix routing.
-- Power-of-two-choices fallback scored on tokens-in-flight (ETIF) and GPU
+- Character-level `RadixTrie` with TTL eviction for longest-prefix routing,
+  following SGLang's cache-aware router: every node records which workers sent
+  that prefix, a match counts only if it covers more than `cache_threshold`
+  (30%) of the prompt, and a load-imbalance guard skips the cache when one
+  worker is far busier than another.
+- Power-of-two-choices fallback scored on tokens-in-flight (ETIF) and vLLM KV
   cache utilization.
 - Optional disaggregated prefill/decode routing with session affinity via
   `X-InferMesh-Session-ID` and `prefill_complete` event handoff over Redis.
 - Per-worker circuit breaker (CLOSED, OPEN, HALF_OPEN with single-probe
-  recovery), semaphore-bounded concurrency, typed error propagation.
-- Prometheus `/metrics` with **13 metric families**. OpenTelemetry spans on the
+  recovery), semaphore-bounded concurrency, typed error propagation. A 429
+  cools the worker down for its `Retry-After`. Failed requests are retried on
+  another worker of the same model before any byte reaches the client.
+- Prometheus `/metrics` with **15 metric families**, including provider-reported
+  prompt-cache hits (`usage.prompt_tokens_details.cached_tokens`). OpenTelemetry spans on the
   request path. Grafana dashboard with **20 panels** in `bench/grafana/`.
 - Redis Streams (at-least-once with PEL replay on reconnect) or Pub/Sub for
   worker events.
@@ -37,7 +44,7 @@ uv run uvicorn infermesh.main:create_app --factory --host 127.0.0.1 --port 8000
 ```bash
 curl -X POST http://127.0.0.1:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -d '{"model":"llama-3.1-8b-instant","messages":[{"role":"user","content":"hi"}]}'
+  -d '{"model":"openai/gpt-oss-20b","messages":[{"role":"user","content":"hi"}]}'
 ```
 
 Open http://127.0.0.1:8000/ for the dashboard, http://127.0.0.1:8000/health for
@@ -49,7 +56,7 @@ live worker state, http://127.0.0.1:8000/metrics for Prometheus.
 rm -rf .venv frontend/node_modules infermesh/static/assets infermesh/static/index.html
 uv venv && uv sync --group dev --group bench
 cd frontend && npm ci && npm run build && cd ..
-uv run pytest tests/ -q          # expect 23 passed
+uv run pytest tests/ -q          # expect 41 passed
 ```
 
 If port 8000 is busy: `lsof -ti :8000 | xargs kill -9`
@@ -63,18 +70,18 @@ If port 8000 is busy: `lsof -ti :8000 | xargs kill -9`
 | `POST /v1/embeddings` | Pass-through. |
 | `GET /v1/models` | Models registered in `workers.yaml`. |
 | `GET /health` | Worker ETIF, circuit states, trie entries, session/Redis counters. |
-| `GET /metrics` | Prometheus scrape (13 metric families). |
+| `GET /metrics` | Prometheus scrape (15 metric families). |
 | `GET /` | React dashboard. |
 
 ## Architecture
 
 | Component | Module | Notes |
 |---|---|---|
-| Router | `infermesh/routing.py` | `RadixTrie` (longest-prefix match, per-model roots, TTL) + `PowerOfTwoChoicesRouter` (ETIF + cache util). |
+| Router | `infermesh/routing.py` | `RadixTrie` (longest-prefix match, per-model roots, per-worker TTL on every node) + SGLang-style cache-aware pick (match ratio, load-imbalance guard, healthy workers only) + `PowerOfTwoChoicesRouter` (ETIF + cache util). |
 | Disaggregated router | `infermesh/routing.py` | `DisaggregatedRouter` splits prefill / decode / mixed pools. `SessionTracker` pins conversations to the decode worker holding their KV. |
 | Event subscriber | `infermesh/kv_subscriber.py` | Consumes `kv_cached`, `kv_evicted`, `prefill_complete` from Redis Streams or Pub/Sub. On reconnect, drains the pending-entries list (`id "0"`) before reading new entries (`">"`). |
-| HTTP proxy | `infermesh/proxy.py` | httpx with three-state circuit breaker, per-worker semaphore, OTEL spans, typed exceptions. Only **5xx and 429** trip the breaker; **4xx (e.g. 401)** do not. |
-| Metrics | `infermesh/metrics.py` | Dedicated `CollectorRegistry`; 6 counters, 2 histograms, 5 gauges. `workers_healthy` excludes workers whose circuit is OPEN. |
+| HTTP proxy | `infermesh/proxy.py` | httpx with three-state circuit breaker, per-worker semaphore, OTEL spans, typed exceptions. **5xx and transport errors** count toward the breaker; a **429** opens it for the upstream's `Retry-After`; other **4xx (e.g. 401)** do not. Streams are opened and status-checked before the gateway answers, so upstream errors keep their status. |
+| Metrics | `infermesh/metrics.py` | Dedicated `CollectorRegistry`; 8 counters, 2 histograms, 5 gauges. `workers_healthy` excludes workers whose circuit is OPEN. |
 | Tracing | `infermesh/tracing.py` | `route_selection`, `worker_request`, `kv_event.*` spans. FastAPI + httpx auto-instrumented. No-op when `OTEL_EXPORTER_OTLP_ENDPOINT` is unset. |
 
 ## Measured results
@@ -83,6 +90,12 @@ Real-API benchmarks against Groq and Gemini. Reproducible artifacts live in
 `bench/results/`. Full harness docs: [`bench/README.md`](bench/README.md).
 
 > The GitHub repository was created on 2026-05-19. The first pushed commit, `0d8ed4b`, is an "Initial Commit" authored 2026-05-15, the night of the Locust run in `bench/results/20260515-195801`, and committed on 2026-06-23. That root was replaced the same hour by history whose author dates say spring 2025 and whose seconds are `:00`. Those trees contain a Locust epoch of 2026-05-15 and npm packages published in May 2026, including `rollup@4.60.4` and `@tanstack/react-query@5.100.10`. The 2025 dates are not when those commits were written. The benchmark JSON in the tree is the record of the run. I am not dating this project 2025.
+
+> These runs predate the routing and failover fixes, and used Groq's Llama
+> models, which Groq shut down on 2026-08-16. Re-run before quoting them. The
+> trie hit rates below are routing predictions; the gateway now also exports
+> `infermesh_upstream_cached_tokens_total`, the provider's own count of
+> cached prompt tokens.
 
 Reference run **`bench/results/20260515-194403/`** — 200 Groq requests per cell,
 concurrency 15, shared-prefix scenario:
@@ -131,10 +144,11 @@ The bottom two rows differ by only ~1.5pp despite carrying no reusable content
 beyond the system prompt — evidence that shallow matches inflate the rate, which
 is what `INFERMESH_KV_MATCH_MIN_CHARS` exists to suppress.
 
-A "cache hit" means the router matched a worker via trie prefix (depth ≥
-`INFERMESH_KV_MATCH_MIN_CHARS`, default 0 = any depth > 0). It reflects routing
-locality, not a guaranteed warm KV cache upstream. Raise `INFERMESH_KV_MATCH_MIN_CHARS`
-to suppress shallow coincidental matches (e.g. shared system prompt only).
+A "cache hit" means the router matched a worker via trie prefix covering more
+than `INFERMESH_CACHE_THRESHOLD` (default 0.3) of the prompt, and at least
+`INFERMESH_KV_MATCH_MIN_CHARS`. It reflects routing locality, not a guaranteed
+warm KV cache upstream; `infermesh_upstream_cached_tokens_total` is the
+provider-reported figure.
 
 ### Reproduce benchmarks
 
@@ -160,12 +174,16 @@ All settings use the `INFERMESH_` env prefix. Source:
 | `INFERMESH_REDIS_TRANSPORT` | `streams` | `streams` (at-least-once + PEL replay) or `pubsub`. |
 | `INFERMESH_ETIF_WEIGHT` | `0.6` | ETIF vs cache-util weight in P2C scoring. |
 | `INFERMESH_ETIF_SCALE` | `4096` | ETIF normalization denominator in P2C. |
-| `INFERMESH_KV_MATCH_MIN_CHARS` | `0` | Min trie match length to count as cache hit. |
+| `INFERMESH_CACHE_THRESHOLD` | `0.3` | Trie match must cover more than this fraction of the prompt (SGLang default). |
+| `INFERMESH_KV_MATCH_MIN_CHARS` | `0` | Extra absolute floor on match length, in characters. |
+| `INFERMESH_BALANCE_ABS_THRESHOLD` | `64` | Skip the cache if max − min requests in flight exceeds this… |
+| `INFERMESH_BALANCE_REL_THRESHOLD` | `1.5` | …and max > min × this (SGLang defaults). |
+| `INFERMESH_MAX_ATTEMPTS` | `2` | Attempts across distinct workers of a model (429, 5xx, connection errors, open circuit). |
 | `INFERMESH_DECODE_SESSION_TTL_S` | `600` | Sticky session TTL. |
 | `INFERMESH_MAX_CONCURRENCY_PER_WORKER` | `20` | Per-worker semaphore cap. |
 | `INFERMESH_METRICS_POLL_INTERVAL_S` | `10` | vLLM upstream `/metrics` poll cadence. |
-| `INFERMESH_CIRCUIT_BREAKER_FAILURE_THRESHOLD` | `5` | Consecutive 5xx/429 failures before OPEN. |
-| `INFERMESH_CIRCUIT_BREAKER_RECOVERY_TIMEOUT_S` | `30` | Seconds OPEN before one HALF_OPEN probe. |
+| `INFERMESH_CIRCUIT_BREAKER_FAILURE_THRESHOLD` | `5` | Consecutive 5xx/transport failures before OPEN. |
+| `INFERMESH_CIRCUIT_BREAKER_RECOVERY_TIMEOUT_S` | `30` | Seconds OPEN before one HALF_OPEN probe (a 429 uses its `Retry-After` instead). |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | unset | Enables OpenTelemetry export. |
 
 Default `workers.yaml` registers **4 workers** (2 Groq, 2 Gemini), all
@@ -207,7 +225,7 @@ uv run python bench/redis_replay_demo.py
 ```
 infermesh/     Gateway code (Python 3.11+).
 frontend/      React + Vite dashboard → built into infermesh/static/.
-tests/         pytest unit tests (23 cases).
+tests/         pytest unit + in-process integration tests (41 cases).
 bench/         Benchmarks (asyncio + Locust), Grafana stack, redis_replay_demo.
 workers.yaml   Worker registry (Groq + Gemini by default).
 pyproject.toml uv project; optional `dev` and `bench` dependency groups.

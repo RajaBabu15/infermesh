@@ -1,19 +1,22 @@
 # Worker registry. Set GROQ_API_KEY and GEMINI_API_KEY in .env first.
 # Groq and Gemini both expose OpenAI-compatible /chat/completions endpoints,
 # so the `type: openai` proxy path handles them without changes.
+# Groq shut down llama-3.1-8b-instant and llama-3.3-70b-versatile for
+# free/developer tiers on 2026-08-16; gpt-oss is Groq's recommended
+# replacement and the only Groq family with prompt caching.
 
 workers:
-  - id: groq-llama-3.1-8b
+  - id: groq-gpt-oss-20b
     type: openai
     url: https://api.groq.com/openai/v1
-    model: llama-3.1-8b-instant
+    model: openai/gpt-oss-20b
     api_key_env: GROQ_API_KEY
     weight: 1
 
-  - id: groq-llama-3.3-70b
+  - id: groq-gpt-oss-120b
     type: openai
     url: https://api.groq.com/openai/v1
-    model: llama-3.3-70b-versatile
+    model: openai/gpt-oss-120b
     api_key_env: GROQ_API_KEY
     weight: 1
 

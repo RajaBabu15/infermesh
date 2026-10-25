@@ -16,19 +16,20 @@ class WorkerConfig(BaseModel):
     api_key: str = ""
     cache_utilization: float = Field(default=0.0, ge=0.0, le=1.0)
     tokens_in_flight: int = 0
+    requests_in_flight: int = 0
     # Ignored when disaggregation_enabled is False.
     role: Literal["prefill", "decode", "mixed"] = "mixed"
 
     def reserve(self, tokens: int) -> None:
         self.tokens_in_flight += tokens
+        self.requests_in_flight += 1
 
     def release(self, tokens: int) -> None:
         self.tokens_in_flight = max(0, self.tokens_in_flight - tokens)
+        self.requests_in_flight = max(0, self.requests_in_flight - 1)
 
 
 class GatewayConfig(BaseSettings):
-    host: str = "0.0.0.0"
-    port: int = 8000
     api_key: str = ""
     workers_config_path: str = "workers.yaml"
     log_level: str = "INFO"
@@ -39,6 +40,15 @@ class GatewayConfig(BaseSettings):
     etif_weight: float = Field(default=0.6, ge=0.0, le=1.0)
     etif_scale: int = Field(default=4096, ge=256)
     kv_match_min_chars: int = Field(default=0, ge=0)
+    # Cache-aware routing thresholds. Defaults are SGLang router's CLI defaults
+    # (--cache-threshold 0.3, --balance-abs-threshold 64,
+    # --balance-rel-threshold 1.5); load is requests in flight.
+    cache_threshold: float = Field(default=0.3, ge=0.0, le=1.0)
+    balance_abs_threshold: int = Field(default=64, ge=0)
+    balance_rel_threshold: float = Field(default=1.5, ge=1.0)
+    # Attempts per request across distinct workers of the same model. A retry
+    # happens only before any byte reached the client.
+    max_attempts: int = Field(default=2, ge=1)
     circuit_breaker_failure_threshold: int = Field(default=5, ge=1)
     circuit_breaker_recovery_timeout_s: float = Field(default=30.0, ge=1.0)
     redis_url: str = ""

@@ -45,8 +45,14 @@ class WorkerRegistry:
 
 
 def parse_gpu_cache_utilization(metrics_text: str) -> float:
-    """Extract vllm:gpu_cache_usage_perc from Prometheus text-format metrics."""
-    pattern = re.compile(r'^vllm:gpu_cache_usage_perc\{[^}]*\}\s+([\d.eE+-]+)', re.MULTILINE)
+    """Extract KV cache usage from vLLM Prometheus text-format metrics.
+
+    vLLM >= 0.9.2 exports vllm:kv_cache_usage_perc; the old
+    vllm:gpu_cache_usage_perc name was removed in 0.12.0.
+    """
+    pattern = re.compile(
+        r'^vllm:(?:kv|gpu)_cache_usage_perc(?:\{[^}]*\})?\s+([\d.eE+-]+)', re.MULTILINE
+    )
     match = pattern.search(metrics_text)
     if match:
         return float(match.group(1))

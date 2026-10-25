@@ -72,7 +72,7 @@ SHARED_SYSTEM_PROMPT = (
 
 PROVIDERS = {
     "groq": {
-        "model": "llama-3.1-8b-instant",
+        "model": "openai/gpt-oss-20b",
         "direct_url": "https://api.groq.com/openai/v1/chat/completions",
         "auth_env": "GROQ_API_KEY",
         "auth_style": "bearer",  # Authorization: Bearer <key>

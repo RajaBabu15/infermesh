@@ -30,7 +30,7 @@ requests_total = Counter(
 
 kv_cache_hits_total = Counter(
     "infermesh_kv_cache_hits_total",
-    "KV cache hits broken down by source (trie / redis_event / session_sticky)",
+    "Routing-level prefix matches by source (trie / session_sticky). A predicted hit, not a measured one",
     ["model", "source"],
     registry=REGISTRY,
 )
@@ -46,6 +46,21 @@ circuit_breaker_opens_total = Counter(
     "infermesh_circuit_breaker_opens_total",
     "Circuit breaker transitions to OPEN state per worker",
     ["worker_id"],
+    registry=REGISTRY,
+)
+
+upstream_prompt_tokens_total = Counter(
+    "infermesh_upstream_prompt_tokens_total",
+    "Prompt tokens reported by upstream usage (non-streaming responses)",
+    ["model", "worker_id"],
+    registry=REGISTRY,
+)
+
+upstream_cached_tokens_total = Counter(
+    "infermesh_upstream_cached_tokens_total",
+    "Prompt tokens the upstream reported as served from its prompt cache "
+    "(usage.prompt_tokens_details.cached_tokens)",
+    ["model", "worker_id"],
     registry=REGISTRY,
 )
 
@@ -121,7 +136,7 @@ worker_tokens_in_flight = Gauge(
 
 worker_cache_utilization = Gauge(
     "infermesh_worker_cache_utilization",
-    "Per-worker vllm:gpu_cache_usage_perc value (0.0-1.0)",
+    "Per-worker vllm:kv_cache_usage_perc value (0.0-1.0)",
     ["worker_id"],
     registry=REGISTRY,
 )

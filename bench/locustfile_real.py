@@ -50,7 +50,7 @@ SHARED_SYSTEM_PROMPT = (
     "Be accurate and direct. Avoid filler words and disclaimers."
 )
 
-MODEL_GROQ = "llama-3.1-8b-instant"
+MODEL_GROQ = "openai/gpt-oss-20b"
 MAX_TOKENS = int(os.getenv("BENCH_LOCUST_MAX_TOKENS", "40"))
 SESSION_HEADER = "X-InferMesh-Session-ID"
 

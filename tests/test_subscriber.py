@@ -20,10 +20,10 @@ def test_dispatch_kv_cached_then_evicted():
     t = RadixTrie(ttl_s=1e9)
     _dispatch_event({"event": "kv_cached", "worker_id": "w", "model": "m", "prefix": "hello"},
                     cfg(), t, None, DummyLog())
-    assert t.longest_prefix_match("m", "hello")[0] == "w"
+    assert t.longest_prefix_match("m", "hello")[0] == ["w"]
     _dispatch_event({"event": "kv_evicted", "worker_id": "w", "model": "m", "prefix": "hello"},
                     cfg(), t, None, DummyLog())
-    assert t.longest_prefix_match("m", "hello")[0] is None
+    assert t.longest_prefix_match("m", "hello")[0] == []
 
 
 def test_dispatch_prefill_complete_registers_session():
@@ -57,7 +57,7 @@ def test_stream_entry_dispatched_and_acked():
                                   "model": "m", "prefix": "hi"})}
     asyncio.run(_handle_stream_entry(fr, "stream", "grp", "1-0", fields,
                                      cfg(), t, None, DummyLog()))
-    assert t.longest_prefix_match("m", "hi")[0] == "w"
+    assert t.longest_prefix_match("m", "hi")[0] == ["w"]
     assert fr.acked == ["1-0"]
 
 

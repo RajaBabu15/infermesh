@@ -25,11 +25,11 @@ def test_core_endpoints_without_upstream():
             models = await c.get("/v1/models")
             assert "test-model" in [m["id"] for m in models.json()["data"]]
 
-            # unknown model has no workers -> 503 no_workers (no upstream call)
+            # unknown model -> 404 model_not_found, as OpenAI does (no upstream call)
             r = await c.post("/v1/chat/completions",
                              json={"model": "ghost", "messages": [{"role": "user", "content": "hi"}]})
-            assert r.status_code == 503
-            assert r.json()["error"]["type"] == "no_workers"
+            assert r.status_code == 404
+            assert r.json()["error"]["code"] == "model_not_found"
 
             mt = await c.get("/metrics")
             assert "infermesh_requests_total" in mt.text
