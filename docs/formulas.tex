@@ -12,21 +12,20 @@
 
 \title{Formulas of the InferMesh Gateway}
 
-\author{\IEEEauthorblockN{Raja Babu}
-\IEEEauthorblockA{IIT (ISM) Dhanbad}}
+\author{Raja Babu}
 
 \maketitle
 
 \begin{abstract}
-InferMesh is an OpenAI-compatible gateway that sends each request to an LLM
-worker likely to hold the prompt prefix in KV cache, and that keeps serving
-when a worker fails or rate-limits. Nothing in the live path is a new
-theorem: each identity is a published special case (SGLang cache-aware
-routing, Azar--Mitzenmacher power of two choices, the SRE 10\% retry budget,
-Envoy linear ejection time, RFC~9110 \texttt{Retry-After}) or is marked
-\emph{assumed}. This note records the identities the code computes, the
-defaults, and the three places the gateway differs from the cited source
-(miss $\to$ P2C, ETIF mix $\alpha=0.6$, DistServe $C_i$ in the replay only).
+Prefix KV is reused only if the next request is assigned to a replica that
+still holds those blocks. That assignment is SGLang's cache-aware
+predicates (match $>0.3$, imbalance $64$ and $1.5$). A miss is
+GREEDY$(d{=}2)$ of Azar \emph{et al.} Retries are admitted from an SRE
+$10\%$ credit ledger. A consecutive-5xx worker is ejected for
+$T=T_0 k$ (Envoy), $T_0=30\,\mathrm{s}$, cap $300\,\mathrm{s}$.
+\texttt{Retry-After} is RFC~9110. Three unpublished extras are marked
+\emph{assumed}: P2C on miss, ETIF weight $\alpha=0.6$, DistServe $C_i$ in
+replay only. Defaults are those of the running code.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -35,27 +34,22 @@ LLM serving, prefix cache, power of two choices, retry budget, outlier ejection
 
 \section{Introduction}
 
-A transformer engine reuses a prompt prefix only if the next request lands
-on the worker that still holds those KV blocks. Independent uniform
-assignment wastes that reuse; sticky assignment pins load. Failures and
-429s add a second problem: unbounded retries turn a short outage into a
-metastable collapse~\cite{bronson2021}.
+Let $p$ be a prompt and $W$ the set of replicas that still accept work.
+A transformer reuses KV for a prefix of $p$ only on a replica that holds
+those blocks~\cite{sglang}. Uniform random assignment ignores the cache;
+sticky assignment pins $L(w)$. Independently, unbounded retries after 5xx
+or 429 amplify a short outage into Bronson metastability~\cite{bronson2021}.
 
-InferMesh sits between OpenAI-format clients and OpenAI-compatible backends.
-On each request it (i)~matches the prompt in a character radix trie,
-(ii)~picks a worker, (iii)~admits at most one retry from a credit ledger,
-(iv)~ejects a worker that posts consecutive 5xx. The predicates and
-constants are those of SGLang's cache-aware router~\cite{sglang},
-Azar \emph{et al.}~\cite{azar1999} with Mitzenmacher's supermarket
-model~\cite{mitzenmacher2001}, Google SRE Chapter~21~\cite{sre2016}, and
-Envoy outlier detection~\cite{envoy-outlier}. Replay service times follow
-the \emph{form} of DistServe Appendix~A~\cite{zhong2024} with unpublished
-constants.
+InferMesh maps each request through four published special cases: SGLang
+cache-aware selection~\cite{sglang}; GREEDY$(2)$~\cite{azar1999},
+\cite{mitzenmacher2001}; SRE's $10\%$ retry ratio~\cite{sre2016}; Envoy
+$T=T_0 k$~\cite{envoy-outlier}. Cool-down headers follow
+RFC~9110~\cite{rfc9110}. Replay service times use the DistServe
+Appendix~A \emph{form}~\cite{zhong2024} with unpublished $C_i$.
 
-This is a specification of the running code, not a claim of a new
-algorithm. A line marked \emph{assumed} is used and has no published
-derivation. Simulator-only identities are confined to
-Section~\ref{sec:replay}. Defaults below are the shipped values.
+A line marked \emph{assumed} is executed and has no published derivation.
+Simulator-only identities are in Section~\ref{sec:replay}. Defaults are
+the shipped values.
 
 \paragraph{Notation.}
 Pool $W$ for a model: the breaker admits the worker and waiters $<Q$.
@@ -234,16 +228,14 @@ Mooncake prompts. Retry sim: Bronson \emph{et al.}~\cite{bronson2021}
 
 \section{Conclusion}
 
-The live gateway is a product of published special cases. Cache hit and
-imbalance are SGLang's CLI predicates; $d=2$ sampling is Azar--Mitzenmacher;
-the retry ledger is SRE's 10 percent ratio with $\rho=1$; ejection time is
-Envoy's $T=T_0 k$ with $T_0=30\,\mathrm{s}$ and cap $300\,\mathrm{s}$;
-\texttt{Retry-After} is RFC~9110.
+Hit and imbalance are SGLang's CLI predicates. Sampling is GREEDY$(2)$.
+The retry ledger is SRE $10\%$ with $\rho=1$. Ejection is Envoy
+$T=T_0 k$, $T_0=30\,\mathrm{s}$, cap $300\,\mathrm{s}$. Cool-down is
+RFC~9110.
 
-Three extras remain and are labelled as such: P2C on miss (SGLang uses
-min-load), the ETIF mix $\alpha=0.6$, and DistServe $C_i$ in the replay
-only. $\alpha_{\rho}$ and headroom mode stay off. Those constants are not
-fitted here.
+Assumed, and left unfitted: P2C on miss (SGLang min-load),
+$\alpha=0.6$, DistServe $C_i$ in replay. $\alpha_{\rho}$ and headroom
+mode remain off.
 
 \begin{thebibliography}{00}
 
