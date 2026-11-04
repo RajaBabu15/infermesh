@@ -88,8 +88,8 @@ class GatewayConfig(BaseSettings):
     retry_rate_window_s: float = Field(default=10.0, gt=0.0)
     circuit_breaker_failure_threshold: int = Field(default=5, ge=1)
     circuit_breaker_recovery_timeout_s: float = Field(default=30.0, ge=1.0)
-    # Each consecutive ejection doubles the recovery time, up to this cap
-    # (Envoy's max_ejection_time default is also 300 s).
+    # Envoy outlier: ejection time = base_ejection_time * consecutive ejections,
+    # capped at max_ejection_time (defaults 30 s and 300 s).
     circuit_breaker_max_recovery_timeout_s: float = Field(default=300.0, ge=1.0)
     # Longest cool-down honoured from Retry-After / x-ratelimit-reset-* hints.
     retry_after_cap_s: float = Field(default=300.0, ge=1.0)

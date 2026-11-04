@@ -31,7 +31,7 @@ All settings use the `INFERMESH_` env prefix. Source:
 | `INFERMESH_RETRY_RHO_BASE` / `_ALPHA` | `1` / `0` | Retry cost `rho_base * (1 - alpha * prefix_hit_ratio)`. Keep `alpha = 0` until measured. |
 | `INFERMESH_MAX_QUEUE_PER_WORKER` / `_QUEUE_TIMEOUT_S` | `40` / `30` | Requests allowed to wait for a worker slot, and how long. |
 | `INFERMESH_RETRY_AFTER_CAP_S` | `300` | Longest cool-down honoured from `Retry-After` or reset headers. |
-| `INFERMESH_CIRCUIT_BREAKER_MAX_RECOVERY_TIMEOUT_S` | `300` | Cap for the doubling ejection time. |
+| `INFERMESH_CIRCUIT_BREAKER_MAX_RECOVERY_TIMEOUT_S` | `300` | Cap for Envoy ejection time (`base * consecutive opens`). |
 | `INFERMESH_CACHE_THRESHOLD` | `0.3` | Trie match must cover more than this fraction of the prompt (SGLang default). |
 | `INFERMESH_KV_MATCH_MIN_CHARS` | `0` | Extra absolute floor on match length, in characters. |
 | `INFERMESH_BALANCE_ABS_THRESHOLD` | `64` | Skip the cache if max − min requests in flight exceeds this… |

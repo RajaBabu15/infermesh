@@ -138,15 +138,15 @@ class CircuitBreaker:
             self.half_open_inflight = False
 
     def _open(self, worker_id: str = "", seconds: float | None = None) -> None:
-        """Open the breaker. Without an explicit cool-down the recovery time
-        doubles with every consecutive ejection (capped), so a worker that keeps
-        failing its probe is probed less and less often."""
+        """Open the breaker. Without an explicit cool-down the recovery time is
+        Envoy's outlier formula: base_ejection_time times the number of
+        consecutive ejections, capped at max_ejection_time (defaults 30 s / 300 s)."""
         if seconds is None:
+            self.consecutive_opens += 1
             seconds = min(
-                self.recovery_timeout_s * (2 ** self.consecutive_opens),
+                self.recovery_timeout_s * self.consecutive_opens,
                 max(self.max_recovery_timeout_s, self.recovery_timeout_s),
             )
-            self.consecutive_opens += 1
         self.state = "OPEN"
         self.retry_at = time.monotonic() + seconds
         self.half_open_inflight = False

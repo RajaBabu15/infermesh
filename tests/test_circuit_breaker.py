@@ -103,11 +103,12 @@ def _remaining(cb):
     return cb.retry_at - time.monotonic()
 
 
-def test_ejection_time_doubles_per_consecutive_ejection_and_is_capped():
+def test_ejection_time_is_base_times_consecutive_opens_and_is_capped():
+    # Envoy: real time = base_ejection_time * ejection count, cap max_ejection_time.
     cb = CircuitBreaker(failure_threshold=1, recovery_timeout_s=10.0, max_recovery_timeout_s=40.0)
     cb.record_failure("w")
     assert 9.5 < _remaining(cb) <= 10.0
-    for expected in (20.0, 40.0, 40.0):
+    for expected in (20.0, 30.0, 40.0, 40.0):
         cb.retry_at = time.monotonic()           # recovery elapsed
         assert cb.allow_request() is True        # half-open probe
         cb.record_failure("w")                   # probe fails
