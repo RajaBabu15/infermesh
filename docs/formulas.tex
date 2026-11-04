@@ -1,10 +1,25 @@
 % !TeX program = pdflatex
 \documentclass[journal,onecolumn]{IEEEtran}
 \IEEEoverridecommandlockouts
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{amsmath,amssymb,amsfonts}
+\else
+  \usepackage{fontspec}
+  \usepackage{amsmath,amssymb}
+  \usepackage{unicode-math}
+  \IfFontExistsTF{TeX Gyre Termes}{
+    \setmainfont{TeX Gyre Termes}
+  }{
+    \setmainfont{Times New Roman}
+  }
+  \IfFontExistsTF{TeX Gyre Termes Math}{
+    \setmathfont{TeX Gyre Termes Math}
+  }{}
+\fi
 \usepackage{cite}
-\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{url}
 \hyphenation{Infer-Mesh SGLang Dist-Serve}
 \newtheorem{theorem}{Theorem}
@@ -71,7 +86,7 @@ Heuristic, not a tokenizer. Let $c$ be the sum of content lengths in the
 messages (roles are not counted), and let $N_{\mathrm{out}}$ be the
 client's \texttt{max\_tokens} (or $256$ if omitted).
 \[
-\hat{n}=\max\bigl(1,\lfloor c/4\rfloor\bigr)+N_{\mathrm{out}}.
+\hat{n}=\max\bigl(1,\left\lfloor c/4\right\rfloor\bigr)+N_{\mathrm{out}}.
 \]
 Drop $N_{\mathrm{out}}$ when \texttt{etif\_count\_output\_tokens} is
 false. Reserved until the response ends. $c$ is not $|p|$: the trie
@@ -127,11 +142,12 @@ Let $T(w)$ be tokens in flight, $U(w)\in[0,1]$ engine KV util, $q(w)$
 engine wait depth. Write $e=\min(T/S,1)$ and
 $q'=\min(q/q_0,1)$. Then
 \begin{equation}
-s(w)=
-\begin{cases}
+s(w)=\left\{
+\begin{array}{@{}ll@{}}
 e & \text{openai or stale }U,\\
 \alpha e+\beta q'+(1-\alpha-\beta)U & \text{otherwise.}
-\end{cases}
+\end{array}
+\right.
 \end{equation}
 Defaults: $\alpha=0.6$, $\beta=0$, $q_0=8$, $S=20\cdot 1024$. Stale means
 older than $3$ poll intervals. $\alpha=0.6$ is \emph{assumed} (no
@@ -181,7 +197,7 @@ ejection time. Defaults $30\,\mathrm{s}$ and $300\,\mathrm{s}$.
 \[
 T(k)=\min(T_0 k,\,T_{\max}),\qquad T_0=30,\; T_{\max}=300.
 \]
-First open $k=1\Rightarrow T=30\,\mathrm{s}$. Success sets $k=0$. Explicit
+First open $k=1$ implies $T=30\,\mathrm{s}$. Success sets $k=0$. Explicit
 Retry-After cool-down does not increment $k$.
 
 States: CLOSED $\to$ OPEN after 5 consecutive 5xx (not 429) $\to$
@@ -195,7 +211,7 @@ zeros $k$).
 \section{Cooldown and queue}
 
 RFC~9110 §10.2.3~\cite{rfc9110}: Retry-After is an HTTP-date or
-delay-seconds. Invalid $\Rightarrow$ ignore. Else the largest vendor
+delay-seconds. Invalid means ignore. Else the largest vendor
 reset (reset headers, Anthropic RFC~3339 / epoch). Cap
 $300\,\mathrm{s}$. Never $\infty$.
 
@@ -207,7 +223,7 @@ waiters $<Q$.
 \label{sec:replay}
 
 Prefill time, DistServe~\cite{zhong2024} Appendix~A \emph{form}
-$T=C_1(\cdots)+C_2(\cdots)+C_3$, constants fitted per model/GPU and
+$T=C_1(\ldots)+C_2(\ldots)+C_3$, constants fitted per model/GPU and
 unpublished:
 \[
 t_{\mathrm{prefill}}(u)=c_1 u+c_2 u^2+c_3
