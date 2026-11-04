@@ -31,6 +31,13 @@ def test_core_endpoints_without_upstream():
             assert r.status_code == 404
             assert r.json()["error"]["code"] == "model_not_found"
 
+            bad = await c.post("/v1/chat/completions",
+                               json={"model": "test-model", "messages": None})
+            assert bad.status_code == 400
+            bad2 = await c.post("/v1/chat/completions",
+                                json={"model": "test-model", "messages": "hi"})
+            assert bad2.status_code == 400
+
             mt = await c.get("/metrics")
             assert "infermesh_requests_total" in mt.text
             assert "infermesh_workers_healthy" in mt.text

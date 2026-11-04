@@ -19,7 +19,6 @@ build/
 .ruff_cache/
 .mypy_cache/
 .tox/
-uv.lock
 
 bench/results/
 

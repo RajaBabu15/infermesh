@@ -333,6 +333,8 @@ async def chat_completions(request: Request) -> Response:
     if isinstance(body, Response):
         return body
     messages = body.get("messages", [])
+    if not isinstance(messages, list) or any(not isinstance(m, dict) for m in messages):
+        return _error_response(400, "invalid_request", "messages must be an array of objects")
     return await _proxy(
         request, endpoint="/v1/chat/completions", path="/chat/completions", body=body,
         model=body.get("model", ""), prefix=RadixTrie.extract_prefix(messages), messages=messages,
@@ -411,7 +413,6 @@ async def health(request: Request) -> JSONResponse:
         "cache_hits_total": int(_sum_counter(metrics.kv_cache_hits_total)),
         "redis_enabled": bool(config.redis_url),
         "redis_transport": config.redis_transport if config.redis_url else None,
-        "prometheus_enabled": config.prometheus_enabled,
         "otel_enabled": getattr(request.app.state, "otel_enabled", False),
     }
 

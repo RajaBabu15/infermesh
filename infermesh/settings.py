@@ -8,7 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class WorkerConfig(BaseModel):
     id: str
-    type: Literal["openai", "vllm"] = "vllm"
+    type: Literal["openai", "vllm"] = "openai"
     url: str
     model: str
     api_key_env: str = "OPENAI_API_KEY"
@@ -107,7 +107,6 @@ class GatewayConfig(BaseSettings):
     redis_stream_consumer_group: str = "infermesh-gateway"
     redis_stream_consumer_name: str = "gateway-0"
 
-    prometheus_enabled: bool = True
     # OTEL tracing activates only when OTEL_EXPORTER_OTLP_ENDPOINT is set.
     otel_service_name: str = "infermesh-gateway"
 

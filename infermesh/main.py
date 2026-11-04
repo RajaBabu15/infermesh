@@ -5,6 +5,7 @@ import asyncio
 import logging
 from contextlib import asynccontextmanager
 
+import httpx
 import structlog
 import structlog.stdlib
 from dotenv import load_dotenv
@@ -50,7 +51,7 @@ async def poll_metrics_once(registry: WorkerRegistry, proxy: HttpProxy) -> None:
             continue
         try:
             text = await proxy.get_raw(worker, "/metrics")
-        except Exception as exc:
+        except httpx.HTTPError as exc:
             log.warning("metrics_poll_failed", worker_id=worker.id, error=str(exc))
             continue
         utilization = parse_gpu_cache_utilization(text)
@@ -103,7 +104,6 @@ def create_app() -> FastAPI:
             models=registry.all_models(),
             redis_enabled=bool(config.redis_url),
             redis_transport=config.redis_transport if config.redis_url else None,
-            prometheus_enabled=config.prometheus_enabled,
         )
         evict_task = asyncio.create_task(_evict_trie_loop(trie))
         poll_task = asyncio.create_task(

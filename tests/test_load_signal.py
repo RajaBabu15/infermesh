@@ -2,6 +2,8 @@
 import asyncio
 import time
 
+import httpx
+
 from infermesh.main import poll_metrics_once
 from infermesh.registry import (
     WorkerRegistry,
@@ -113,7 +115,7 @@ def test_poll_records_values_and_timestamp(tmp_path):
 def test_failed_poll_keeps_old_values_and_their_age(tmp_path):
     reg = _registry(tmp_path)
     reg.update_metrics("v1", 0.8, 2, now=123.0)
-    asyncio.run(poll_metrics_once(reg, FakeProxy({"v1": RuntimeError("down")})))
+    asyncio.run(poll_metrics_once(reg, FakeProxy({"v1": httpx.ConnectError("down")})))
     w = reg.all_workers()[0]
     assert (w.cache_utilization, w.queue_depth, w.cache_utilization_at) == (0.8, 2, 123.0)
 
