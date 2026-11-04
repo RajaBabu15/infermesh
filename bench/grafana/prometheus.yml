@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+  external_labels:
+    monitor: "infermesh-bench"
+
+scrape_configs:
+  - job_name: "infermesh-gateway"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["host.docker.internal:8000"]
+        labels:
+          service: "infermesh"

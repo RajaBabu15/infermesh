@@ -1,0 +1,152 @@
+"""FastAPI application factory."""
+from __future__ import annotations
+
+import asyncio
+import logging
+from contextlib import asynccontextmanager
+
+import structlog
+import structlog.stdlib
+from dotenv import load_dotenv
+from fastapi import FastAPI
+
+from infermesh.proxy import HttpProxy
+from infermesh.registry import WorkerRegistry, parse_gpu_cache_utilization, parse_num_requests_waiting
+from infermesh.retry_budget import RetryBudget
+from infermesh.routing import KVAwareRouter
+from infermesh.routes import router
+from infermesh.settings import GatewayConfig
+from infermesh.trie import RadixTrie
+from infermesh.tracing import init_tracing, instrument_app
+
+structlog.configure(
+    processors=[
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.add_logger_name,
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.JSONRenderer(),
+    ],
+    wrapper_class=structlog.stdlib.BoundLogger,
+    context_class=dict,
+    logger_factory=structlog.stdlib.LoggerFactory(),
+)
+
+log = structlog.get_logger()
+
+
+async def _evict_trie_loop(trie: RadixTrie, interval_s: float = 60.0) -> None:
+    while True:
+        await asyncio.sleep(interval_s)
+        removed = trie.evict_expired()
+        if removed:
+            log.debug("trie_eviction", removed=removed)
+
+
+async def poll_metrics_once(registry: WorkerRegistry, proxy: HttpProxy) -> None:
+    """Poll every vLLM worker once. On failure the worker keeps its last values
+    and their timestamp, so the router stops trusting them after metrics_max_age_s."""
+    for worker in registry.all_workers():
+        if worker.type != "vllm":
+            continue
+        try:
+            text = await proxy.get_raw(worker, "/metrics")
+        except Exception as exc:
+            log.warning("metrics_poll_failed", worker_id=worker.id, error=str(exc))
+            continue
+        utilization = parse_gpu_cache_utilization(text)
+        waiting = parse_num_requests_waiting(text)
+        if utilization is None and waiting is None:
+            log.warning("metrics_poll_empty", worker_id=worker.id)
+            continue
+        registry.update_metrics(worker.id, utilization, waiting)
+        log.debug("metrics_polled", worker_id=worker.id, cache_utilization=utilization,
+                  queue_depth=waiting)
+
+
+async def _poll_metrics_loop(
+    registry: WorkerRegistry,
+    proxy: HttpProxy,
+    interval_s: float,
+) -> None:
+    while True:
+        await asyncio.sleep(interval_s)
+        await poll_metrics_once(registry, proxy)
+
+
+def create_app() -> FastAPI:
+    # WorkerRegistry reads worker API keys via os.environ, so we need
+    # dotenv to populate the process env (pydantic-settings only loads
+    # its own model fields).
+    load_dotenv()
+    config = GatewayConfig()
+    # structlog hands records to stdlib logging; without a root handler at
+    # INFO, every log.info() call is dropped.
+    logging.basicConfig(level=config.log_level.upper(), format="%(message)s")
+
+    otel_enabled = init_tracing(config.otel_service_name)
+    if otel_enabled:
+        log.info("otel_tracing_enabled", service=config.otel_service_name)
+
+    registry = WorkerRegistry(config.workers_config_path)
+    trie = RadixTrie(
+        ttl_s=config.prefix_ttl_s, max_chars_per_worker=config.prefix_max_chars_per_worker
+    )
+    proxy = HttpProxy(config)
+    # Workers with an open circuit or a full queue are skipped.
+    kv_router = KVAwareRouter(registry, trie, config, is_available=proxy.is_available)
+
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        log.info(
+            "gateway_started",
+            workers=len(registry.all_workers()),
+            models=registry.all_models(),
+            redis_enabled=bool(config.redis_url),
+            redis_transport=config.redis_transport if config.redis_url else None,
+            prometheus_enabled=config.prometheus_enabled,
+        )
+        evict_task = asyncio.create_task(_evict_trie_loop(trie))
+        poll_task = asyncio.create_task(
+            _poll_metrics_loop(registry, proxy, config.metrics_poll_interval_s)
+        )
+        redis_task: asyncio.Task | None = None
+        if config.redis_url:
+            from infermesh.kv_subscriber import kv_subscriber_loop
+            redis_task = asyncio.create_task(
+                kv_subscriber_loop(trie, config)
+            )
+
+        try:
+            yield
+        finally:
+            evict_task.cancel()
+            poll_task.cancel()
+            if redis_task is not None:
+                redis_task.cancel()
+                try:
+                    await redis_task
+                except asyncio.CancelledError:
+                    pass
+            await proxy.client.aclose()
+            log.info("gateway_stopped")
+
+    app = FastAPI(
+        title="InferMesh",
+        description="KV-cache-aware distributed LLM inference gateway",
+        version="0.1.0",
+        lifespan=lifespan,
+    )
+    app.state.config = config
+    app.state.registry = registry
+    app.state.trie = trie
+    app.state.router = kv_router
+    app.state.proxy = proxy
+    app.state.retry_budget = RetryBudget.from_config(config)
+    app.state.otel_enabled = otel_enabled
+
+    app.include_router(router)
+
+    if otel_enabled:
+        instrument_app(app)
+
+    return app
