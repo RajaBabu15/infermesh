@@ -32,7 +32,7 @@ An earlier "18x faster" Groq number was load shedding and has been removed. Tabl
 
 ## More
 
-- [docs/formulas.md](docs/formulas.md): selection, retry, ejection, and what is assumed.
+- [docs/formulas.pdf](docs/formulas.pdf): selection, retry, ejection, and what is assumed.
 - [docs/configuration.md](docs/configuration.md): every `INFERMESH_*` setting, and running several replicas.
 - [docs/benchmarks.md](docs/benchmarks.md): results, method, reproduction.
 - `uv run python -m pytest tests/ -q` runs the tests. `bench/grafana/` has the dashboard (`docker compose up -d`).
